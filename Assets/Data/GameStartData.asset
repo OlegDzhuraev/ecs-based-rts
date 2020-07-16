@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61f97b678e7a483fa54f9bd770a5963f, type: 3}
+  m_Name: GameStartData
+  m_EditorClassIdentifier: 
+  StartUnit: {fileID: 11400000, guid: cfed167da7488cd4997c6b6ac4ff9de5, type: 2}
+  StartPlayersCount: 2
+  StartMoney: 1000
+  CameraSpeed: 20
+  PlayerColors:
+  - {r: 0.9, g: 0.4, b: 0.3, a: 1}
+  - {r: 0.2, g: 0.4, b: 0.9, a: 1}
+  - {r: 0.3, g: 0.9, b: 0.4, a: 1}
+  - {r: 0.9, g: 0.8, b: 0.4, a: 1}

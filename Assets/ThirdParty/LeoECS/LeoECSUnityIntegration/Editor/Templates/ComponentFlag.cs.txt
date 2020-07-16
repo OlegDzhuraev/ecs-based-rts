@@ -1,0 +1,6 @@
+﻿using Leopotam.Ecs;
+
+namespace #NS# 
+{
+    struct #SCRIPTNAME# : IEcsIgnoreInFilter { }
+}

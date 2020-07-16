@@ -1,0 +1,14 @@
+﻿using Leopotam.Ecs;
+
+namespace #NS# 
+{
+    sealed class #SCRIPTNAME# : IEcsRunSystem 
+    {
+        readonly EcsWorld world = null;
+        
+        void IEcsRunSystem.Run () 
+        {
+        
+        }
+    }
+}
