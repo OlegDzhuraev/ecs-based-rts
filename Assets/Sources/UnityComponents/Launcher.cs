@@ -1,6 +1,8 @@
 using Leopotam.Ecs;
+using Sources.Components.Events;
 using Sources.Storing;
 using Sources.Systems;
+using Sources.UI.Components.Events;
 using UnityEngine;
 
 namespace Sources.UnityComponents
@@ -8,6 +10,7 @@ namespace Sources.UnityComponents
     sealed class Launcher : MonoBehaviour
     {
         [SerializeField] GameStartData StartData;
+        [SerializeField] Canvas uiCanvas;
         
         EcsWorld world;
         EcsSystems systems;
@@ -38,7 +41,20 @@ namespace Sources.UnityComponents
             
             systems.Add(new GameMatchLauncherSystem());
 
+            systems.Add(new Sources.UI.Systems.FloatingSystem()); // todo move to UI init system?
+            systems.Add(new Sources.UI.Systems.HealthbarsSystem());
+            
             systems.Inject(StartData);
+            systems.Inject(Camera.main);
+            systems.Inject(uiCanvas);
+
+            systems.OneFrame<TakeDamageEvent>();
+            systems.OneFrame<ChangeUnitOwnerEvent>();
+            systems.OneFrame<MoveOrderEvent>();
+            systems.OneFrame<SpawnUnitEvent>();
+            
+            systems.OneFrame<RemoveHealthbarEvent>();
+            systems.OneFrame<AddHealthbarEvent>();
             
             systems.Init();
         }

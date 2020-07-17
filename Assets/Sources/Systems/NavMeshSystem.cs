@@ -35,8 +35,6 @@ namespace Sources
                     navMeshComponent.Path = path;
                     navMeshComponent.CurrentPoint = 0;
                 }
-
-                ordersFilter.GetEntity(i).Del<MoveOrderEvent>();
             }
         }
 

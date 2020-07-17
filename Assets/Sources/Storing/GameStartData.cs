@@ -23,5 +23,8 @@ namespace Sources.Storing
 			new Color(0.3f, 0.9f, 0.4f, 1f),
 			new Color(0.9f, 0.8f, 0.4f, 1f),
 		};
+
+		[Header("UI Templates")] 
+		public GameObject HealthbarTemplate;
 	}
 }

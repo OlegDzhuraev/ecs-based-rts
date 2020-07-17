@@ -18,8 +18,6 @@ namespace Sources.Systems
                 ref var spawnUnitEvent = ref filter.Get1(i);
                 
                 ProcessSpawn(spawnUnitEvent);
-                
-                filter.GetEntity(i).Destroy();
             }
         }
 

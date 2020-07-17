@@ -4,8 +4,10 @@ using UnityEngine;
 
 namespace Sources.Systems
 {
-    sealed class AttackSystem : IEcsRunSystem 
+    sealed class AttackSystem : IEcsRunSystem
     {
+        readonly EcsSystems ecsSystems;
+        
         readonly EcsFilter<AttackComponent, UnitTargetComponent> filter = null;
         
         void IEcsRunSystem.Run ()
@@ -26,7 +28,7 @@ namespace Sources.Systems
                     continue;
                
                 }
-
+                
                 DoShoot(ref attackComponent, unitTargetComponent.EnemyTargetEntity);
             }
         }

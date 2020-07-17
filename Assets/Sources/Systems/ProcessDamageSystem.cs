@@ -1,11 +1,13 @@
 using Leopotam.Ecs;
 using Sources.Components;
+using Sources.UI.Components.Events;
 using UnityEngine;
 
 namespace Sources.Systems
 {
-    sealed class ProcessDamageSystem : IEcsRunSystem 
+    sealed class ProcessDamageSystem : IEcsRunSystem
     {
+        readonly EcsWorld world;
         readonly EcsFilter<UnitComponent, TakeDamageEvent> filter = null;
         
         void IEcsRunSystem.Run ()
@@ -15,26 +17,25 @@ namespace Sources.Systems
                 var unitEntity = filter.GetEntity(i);
                 ref var unitComponent = ref filter.Get1(i);
                 ref var takeDamageEvent = ref filter.Get2(i);
-
-                TakeDamage(unitEntity, ref unitComponent, takeDamageEvent.Value);
                 
-                if (unitEntity.IsAlive())
-                    unitEntity.Del<TakeDamageEvent>();
+                TakeDamage(unitEntity, ref unitComponent, takeDamageEvent.Value);
             }
         }
 
         void TakeDamage(EcsEntity unitEntity, ref UnitComponent unit, in float damage)
         {
-            unit.Health = Mathf.Clamp( unit.Health - damage, 0, unit.DefenseData.MaxHealth);
+            unit.Health = Mathf.Clamp(unit.Health - damage, 0, unit.DefenseData.MaxHealth);
 
             if (unit.Health <= 0)
                 KillUnit(unitEntity, ref unit);
         }
 
-        void KillUnit(EcsEntity unitEntity, ref UnitComponent unit)  // todo maybe replace to event and process death system
+        void KillUnit(EcsEntity unitEntity, ref UnitComponent unit)  // todo replace to event and process death system
         {
-            GameObject.Destroy(unit.SelfObject);
+            world.NewEntity().Get<RemoveHealthbarEvent>().FromUnit = unit;
             
+            GameObject.Destroy(unit.SelfObject);
+
             unitEntity.Destroy();
         }
     }

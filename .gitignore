@@ -4,3 +4,4 @@ Library/
 obj/
 Logs/
 *.sln
+Temp/

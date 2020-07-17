@@ -8,21 +8,17 @@ namespace Sources
     {
         readonly EcsWorld world = null;
         readonly EcsSystems systems = null;
+        readonly Camera camera;
+        
         readonly EcsFilter<SelectedTag> filter = null;
 
         readonly RaycastHit[] raycastHits = new RaycastHit[1];
-
-        // todo replace to inject or smth
-        Camera camera;
         
         void IEcsRunSystem.Run ()
         {
             if (!Input.GetMouseButtonDown(1))
                 return;
 
-            if (!camera)
-                camera = Camera.main;
-            
             var ray = camera.ScreenPointToRay(Input.mousePosition);
             var hitsCount = Physics.RaycastNonAlloc(ray, raycastHits, 1000);
 

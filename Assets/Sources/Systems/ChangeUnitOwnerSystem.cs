@@ -26,8 +26,6 @@ namespace Sources.Systems
 		        
 		        foreach (var renderer in coloredRenderers.Renderers)
 			        renderer.material.SetColor(colorId, gameStartData.PlayerColors[unit.OwnerPlayerId]);
-
-		        unitFilter.GetEntity(i).Del<ChangeUnitOwnerEvent>();
 	        }
         }
     }
