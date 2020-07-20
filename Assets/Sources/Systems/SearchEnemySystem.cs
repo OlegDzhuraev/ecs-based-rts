@@ -34,14 +34,14 @@ namespace Sources.Systems
         {
             foreach (var i in unitsFilter)
             {
-                ref var otherUnit = ref searchersFilter.Get1(i);
+                ref var otherUnit = ref unitsFilter.Get1(i);
 
                 if (IsEnemies(unit, otherUnit) && CanAttackByDistance(unit.Position, otherUnit.Position, TempSqrDist))
                 {
                     ref var unitTarget = ref unitEntity.Get<UnitTargetComponent>();
                     
                     unitTarget.EnemyTarget = otherUnit;
-                    unitTarget.EnemyTargetEntity = searchersFilter.GetEntity(i);
+                    unitTarget.EnemyTargetEntity = unitsFilter.GetEntity(i);
                     
                     break;
                 }
