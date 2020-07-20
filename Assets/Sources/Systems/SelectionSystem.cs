@@ -37,7 +37,7 @@ namespace Sources.Systems
                     ref var unitComponent = ref unitsFilter.Get1(i);
                     var unitObject = unitComponent.SelfObject;
 
-                    if (hit.collider.gameObject == unitObject)
+                    if (hit.collider.gameObject == unitObject && unitComponent.OwnerPlayerId == PlayerComponent.LocalPlayerId)
                     {
                         var entity = unitsFilter.GetEntity(i);
 

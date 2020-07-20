@@ -6,8 +6,6 @@ namespace Sources
 {
     sealed class OrderingSystem : IEcsRunSystem 
     {
-        readonly EcsWorld world = null;
-        readonly EcsSystems systems = null;
         readonly Camera camera;
         
         readonly EcsFilter<SelectedTag> filter = null;
