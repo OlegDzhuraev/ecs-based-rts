@@ -18,6 +18,9 @@ namespace Sources.Storing
 
         [Header("Production parameters")]
         public ProductionData Production;
+        
+        [Header("Effects parameters")]
+        public EffectsData Effects;
     }
 
     [System.Serializable]
@@ -26,6 +29,7 @@ namespace Sources.Storing
         public bool CanProduceUnits;
         public UnitData[] Units;
         public float SelfProduceTime;
+        public int Price;
     }
 
     [System.Serializable]
@@ -50,5 +54,11 @@ namespace Sources.Storing
         public float Damage;
         public float ReloadTime;
         public bool HaveTurret;
+    }
+    
+    [System.Serializable]
+    public struct EffectsData
+    {
+        public GameObject ShootEffect;
     }
 }

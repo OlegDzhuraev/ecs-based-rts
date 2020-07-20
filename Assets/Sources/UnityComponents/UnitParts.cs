@@ -7,5 +7,6 @@ namespace Sources.UnityComponents
     {
         public Renderer[] ColoredRenderers;
         public Transform Turret;
+        public Transform ShootPoint;
     }
 }

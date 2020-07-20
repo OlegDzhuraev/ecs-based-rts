@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - StartPoint
+  - UI/MoneyText
   layers:
   - Default
   - TransparentFX

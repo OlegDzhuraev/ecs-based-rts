@@ -25,7 +25,6 @@ namespace Sources.UnityComponents
             Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create(systems);
 #endif
             systems.Add(new GameMatchLauncherSystem());
-         
             
             systems.Add(new OrderingSystem());
 
@@ -42,11 +41,14 @@ namespace Sources.UnityComponents
             systems.Add(new SearchEnemySystem());
             systems.Add(new ProcessDamageSystem());
             systems.Add(new ChangeUnitOwnerSystem());
+            systems.Add(new UnitsEffectsSystem());
             
+            systems.Add(new PlayersSystem());
             systems.Add(new CameraSystem());
 
             systems.Add(new Sources.UI.Systems.FloatingSystem()); // todo move to UI init system?
             systems.Add(new Sources.UI.Systems.HealthbarsSystem());
+            systems.Add(new Sources.UI.Systems.GameInfoSystem());
             
             systems.Inject(StartData);
             systems.Inject(Camera.main);
@@ -56,9 +58,11 @@ namespace Sources.UnityComponents
             systems.OneFrame<ChangeUnitOwnerEvent>();
             systems.OneFrame<MoveOrderEvent>();
             systems.OneFrame<SpawnUnitEvent>();
+            systems.OneFrame<ShootEvent>();
             
             systems.OneFrame<RemoveHealthbarEvent>();
             systems.OneFrame<AddHealthbarEvent>();
+            systems.OneFrame<PlayerSpendMoneyEvent>();
             
             systems.Init();
         }

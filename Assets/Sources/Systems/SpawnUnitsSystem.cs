@@ -5,6 +5,7 @@ using Sources.Components;
 using Sources.Components.Events;
 using Sources.Storing;
 using Sources.UnityComponents;
+using UnityEngine.AI;
 
 namespace Sources.Systems
 {
@@ -40,6 +41,9 @@ namespace Sources.Systems
 
             ref var coloredRenderers = ref unitEntitiy.Get<ColoredRenderers>();
             coloredRenderers.Renderers = unitParts.ColoredRenderers;
+
+            ref var effects = ref unitEntitiy.Get<EffectsComponent>();
+            effects.ShootEffect = data.Effects.ShootEffect;
             
             if (data.Attack.HaveTurret)
             {
@@ -51,6 +55,7 @@ namespace Sources.Systems
             {
                 ref var attack = ref unitEntitiy.Get<AttackComponent>();
                 attack.Data = data.Attack;
+                attack.ShootPoint = unitParts.ShootPoint;
             }
 
             if (data.Move.CanMove)
@@ -65,6 +70,12 @@ namespace Sources.Systems
                 movable.Destination = spawnedObject.transform.position;
                 
                 unitEntitiy.Get<NavMeshComponent>();
+            }
+            else
+            {
+                var obstacle = spawnedObject.AddComponent<NavMeshObstacle>(); // making not moving objects stationary obstacle in navmesh
+                obstacle.carving = true;
+                obstacle.size = spawnedObject.GetComponent<Collider>().bounds.size;
             }
 
             if (data.Production.CanProduceUnits)

@@ -1,4 +1,4 @@
-namespace Sources 
+namespace Sources.Components.Events
 {
     struct TakeDamageEvent
     {

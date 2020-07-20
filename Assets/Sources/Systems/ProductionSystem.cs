@@ -2,6 +2,7 @@ using Leopotam.Ecs;
 using Sources.Components;
 using Sources.Components.Events;
 using Sources.Components.Tags;
+using Sources.Storing;
 using UnityEngine;
 
 namespace Sources 
@@ -11,6 +12,8 @@ namespace Sources
         readonly EcsWorld world = null;
         readonly EcsFilter<ProductionComponent, UnitComponent> filter = null;
         readonly EcsFilter<ProductionComponent, SelectedTag> selectedFilter = null;
+        
+        readonly EcsFilter<PlayerComponent> playersFilter = null;
         
         void IEcsRunSystem.Run ()
         {
@@ -35,7 +38,7 @@ namespace Sources
             }
 
             foreach (var i in selectedFilter)
-                DebugInput(ref filter.Get1(i));
+                DebugKeysInput(ref filter.Get2(i), ref filter.Get1(i));
         }
 
         void ProduceUnit(ref ProductionComponent production, int ownedBy)
@@ -56,17 +59,35 @@ namespace Sources
             
             production.Queue.RemoveAt(0);
         }
-        
-        void DebugInput(ref ProductionComponent production)
+
+        void AddToQueue(ref UnitComponent productionUnit, ref ProductionComponent production, UnitData unit)
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-                production.Queue.Add(production.Data.Units[0]);
+            foreach (var i in playersFilter)
+            {
+                ref var player = ref playersFilter.Get1(i);
+               
+                if (player.Id != productionUnit.OwnerPlayerId)
+                    continue;
+                
+                if (player.Money >= unit.Production.Price)
+                {
+                    playersFilter.GetEntity(i).Get<PlayerSpendMoneyEvent>().Value = unit.Production.Price;
+                    production.Queue.Add(unit);
+                    
+                    break;
+                }
+            }
+        }
+        
+        void DebugKeysInput(ref UnitComponent productionUnit, ref ProductionComponent production)
+        {
+            var unitsCount = Mathf.Min(production.Data.Units.Length, 9);
             
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-                production.Queue.Add(production.Data.Units[1]);
-            
-            if (Input.GetKeyDown(KeyCode.Alpha3))
-                production.Queue.Add(production.Data.Units[2]);
+            for (int i = 1; i <= unitsCount; i++)
+            {
+                if (Input.GetKeyDown(i.ToString()))
+                    AddToQueue(ref productionUnit, ref production, production.Data.Units[i - 1]);
+            }
         }
     }
 }

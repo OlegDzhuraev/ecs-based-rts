@@ -1,5 +1,6 @@
 using Leopotam.Ecs;
 using Sources.Components;
+using Sources.Components.Events;
 using Sources.Storing;
 using Sources.UI.Components;
 using Sources.UI.Components.Events;

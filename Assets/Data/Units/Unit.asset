@@ -29,3 +29,7 @@ MonoBehaviour:
     CanProduceUnits: 0
     Units: []
     SelfProduceTime: 2
+    Price: 100
+  Effects:
+    ShootEffect: {fileID: 347417622014788243, guid: bcc696785c061974aaf113f6e1ce18a5,
+      type: 3}
