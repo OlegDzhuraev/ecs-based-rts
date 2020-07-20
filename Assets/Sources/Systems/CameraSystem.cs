@@ -7,13 +7,18 @@ namespace Sources
 {
     sealed class CameraSystem : IEcsInitSystem, IEcsRunSystem
     {
+        const float ScreenBorderInPx = 5;
+        
         readonly EcsWorld world;
         readonly GameStartData startData;
         
         readonly EcsFilter<CameraComponent, MovableComponent> filter = null;
-
+        
         Vector3 startMousePosition;
         bool mouseInputOn;
+
+        Vector2 screenSize, screenCenter;
+        Rect borderedScreenRect;
         
         public void Init()
         {
@@ -26,11 +31,18 @@ namespace Sources
             movable.Transform = cameraComponent.Camera.transform;
             movable.Destination = movable.Transform.position;
             movable.Data.MoveSpeed = startData.CameraSpeed;
+            
+            var startPoint = new Vector2(0 + ScreenBorderInPx, 0 + ScreenBorderInPx);
+            var size = new Vector2(Screen.width - ScreenBorderInPx * 2f, Screen.height - ScreenBorderInPx * 2f);
+            screenSize = new Vector2(Screen.width, Screen.height);
+            screenCenter = screenSize / 2f;
+            
+            borderedScreenRect = new Rect(startPoint, size);
         }
         
         void IEcsRunSystem.Run ()
         {
-            var input = GetKeysFormattedInput() + GetMouseFormattedInput();
+            var input = GetKeysFormattedInput() + GetMouseFormattedInput() + GetMouseBorderInput();
             
             foreach (var i in filter)
             {
@@ -57,10 +69,24 @@ namespace Sources
             if (!mouseInputOn)
                 return Vector3.zero;
             
-            var screenSize = new Vector2(Screen.width, Screen.height);
-            var realInput = (Input.mousePosition - startMousePosition) / screenSize;
+            var realInput =  GetOffsettedInput(Input.mousePosition, startMousePosition);
             
-            return new Vector3(realInput.x, 0, realInput.y);
+            return ScreenPosToCameraDirection(realInput);
         }
+
+        Vector3 GetMouseBorderInput()
+        {
+            var mousePosition = Input.mousePosition;
+            
+            if (borderedScreenRect.Contains(mousePosition))
+                return Vector3.zero;
+            
+            var realInput = GetOffsettedInput(Input.mousePosition, screenCenter);
+            
+            return ScreenPosToCameraDirection(realInput);
+        }
+        
+        Vector2 GetOffsettedInput(Vector2 input, Vector2 center) => (input - center) / screenSize;
+        Vector3 ScreenPosToCameraDirection(Vector2 screenPos) => new Vector3(screenPos.x, 0, screenPos.y);
     }
 }
