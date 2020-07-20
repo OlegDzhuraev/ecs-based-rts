@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f97b678e7a483fa54f9bd770a5963f, type: 3}
   m_Name: GameStartData
   m_EditorClassIdentifier: 
-  StartUnit: {fileID: 11400000, guid: cfed167da7488cd4997c6b6ac4ff9de5, type: 2}
+  StartUnit: {fileID: 11400000, guid: 37f1840067037d94495a8807b70e2d3e, type: 2}
   StartPlayersCount: 2
   StartMoney: 1000
   CameraSpeed: 20

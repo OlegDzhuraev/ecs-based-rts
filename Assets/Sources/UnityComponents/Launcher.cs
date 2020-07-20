@@ -24,22 +24,26 @@ namespace Sources.UnityComponents
             Leopotam.Ecs.UnityIntegration.EcsWorldObserver.Create(world);
             Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create(systems);
 #endif
+            systems.Add(new GameMatchLauncherSystem());
+         
+            
+            systems.Add(new OrderingSystem());
+
             systems.Add(new MovableSystem());
             systems.Add(new TurretSystem());
             systems.Add(new AttackSystem());
-            systems.Add(new ChangeUnitOwnerSystem());
+           
             systems.Add(new NavMeshSystem());
-            
-            systems.Add(new OrderingSystem());
+            systems.Add(new ProductionSystem());
+
             systems.Add(new SelectionSystem());
             
             systems.Add(new SpawnUnitsSystem());
             systems.Add(new SearchEnemySystem());
             systems.Add(new ProcessDamageSystem());
-
-            systems.Add(new CameraSystem());
+            systems.Add(new ChangeUnitOwnerSystem());
             
-            systems.Add(new GameMatchLauncherSystem());
+            systems.Add(new CameraSystem());
 
             systems.Add(new Sources.UI.Systems.FloatingSystem()); // todo move to UI init system?
             systems.Add(new Sources.UI.Systems.HealthbarsSystem());

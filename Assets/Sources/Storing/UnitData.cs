@@ -16,7 +16,18 @@ namespace Sources.Storing
         [Header("Attack parameters")] 
         public AttackData Attack;
 
+        [Header("Production parameters")]
+        public ProductionData Production;
     }
+
+    [System.Serializable]
+    public struct ProductionData
+    {
+        public bool CanProduceUnits;
+        public UnitData[] Units;
+        public float SelfProduceTime;
+    }
+
     [System.Serializable]
     public struct MoveData
     {
@@ -38,5 +49,6 @@ namespace Sources.Storing
         public bool CanAttack;
         public float Damage;
         public float ReloadTime;
+        public bool HaveTurret;
     }
 }

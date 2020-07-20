@@ -10,17 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2987bcf416ef5f46902a6b1411e0848, type: 3}
-  m_Name: TestUnit
+  m_Name: Production
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 5634468991950757750, guid: 79147a8e9968e8f4ba7296e879ff31b2, type: 3}
+  Prefab: {fileID: 1700406999934802745, guid: 43c9d1c33074da6478d9d5d9be17a2ad, type: 3}
   Move:
-    CanMove: 1
+    CanMove: 0
     MoveSpeed: 2
     RotationSpeed: 360
     StopDistance: 0.15
   Defense:
-    MaxHealth: 100
+    MaxHealth: 300
   Attack:
-    CanAttack: 1
+    CanAttack: 0
     Damage: 25
     ReloadTime: 2
+    HaveTurret: 0
+  Production:
+    CanProduceUnits: 1
+    Units:
+    - {fileID: 11400000, guid: cfed167da7488cd4997c6b6ac4ff9de5, type: 2}
+    SelfProduceTime: 0

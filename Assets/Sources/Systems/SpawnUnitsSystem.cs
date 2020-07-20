@@ -1,7 +1,9 @@
-﻿using Leopotam.Ecs;
+﻿using System.Collections.Generic;
+using Leopotam.Ecs;
 using UnityEngine;
 using Sources.Components;
 using Sources.Components.Events;
+using Sources.Storing;
 using Sources.UnityComponents;
 
 namespace Sources.Systems
@@ -35,12 +37,15 @@ namespace Sources.Systems
             unit.Transform = spawnedObject.transform;
             unit.DefenseData = data.Defense;
             unit.Health = unit.DefenseData.MaxHealth;
-            
-            ref var turret = ref unitEntitiy.Get<TurretComponent>();
-            turret.Turret = unitParts.Turret;
-            
+
             ref var coloredRenderers = ref unitEntitiy.Get<ColoredRenderers>();
             coloredRenderers.Renderers = unitParts.ColoredRenderers;
+            
+            if (data.Attack.HaveTurret)
+            {
+                ref var turret = ref unitEntitiy.Get<TurretComponent>();
+                turret.Turret = unitParts.Turret;
+            }
             
             if (data.Attack.CanAttack)
             {
@@ -60,6 +65,15 @@ namespace Sources.Systems
                 movable.Destination = spawnedObject.transform.position;
                 
                 unitEntitiy.Get<NavMeshComponent>();
+            }
+
+            if (data.Production.CanProduceUnits)
+            {
+                ref var production = ref unitEntitiy.Get<ProductionComponent>();
+                
+                production.Data = data.Production;
+                production.SpawnPoint = spawnedObject.transform.position + spawnedObject.transform.forward * 2f; // todo replace this hardcode
+                production.Queue = new List<UnitData>();
             }
             
             unitEntitiy.Get<ChangeUnitOwnerEvent>().NewOwnerPlayerId = spawnUnitEvent.OwnerPlayerId;
