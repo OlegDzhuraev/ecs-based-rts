@@ -1,7 +1,7 @@
 # ECS-based RTS on Unity
 RTS game example based on Entity Component System in Unity game engine.
 
-Unity version: 2019.4
+Unity version: 2019.4<br>
 Using ECS Framework: [LeoECS](https://github.com/Leopotam/ecs)
 
 # Purpose of this project
