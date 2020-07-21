@@ -1,9 +1,8 @@
+using InsaneOne.EcsRts.Storing;
 using Leopotam.Ecs;
-using Sources.Components;
-using Sources.Storing;
 using UnityEngine;
 
-namespace Sources 
+namespace InsaneOne.EcsRts 
 {
     sealed class CameraSystem : IEcsInitSystem, IEcsRunSystem
     {

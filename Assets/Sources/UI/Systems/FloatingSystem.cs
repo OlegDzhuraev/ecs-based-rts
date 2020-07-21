@@ -1,8 +1,7 @@
 using Leopotam.Ecs;
-using Sources.UI.Components;
 using UnityEngine;
 
-namespace Sources.UI.Systems
+namespace InsaneOne.EcsRts.UI
 {
     sealed class FloatingSystem : IEcsRunSystem 
     {

@@ -1,4 +1,4 @@
-namespace Sources 
+namespace InsaneOne.EcsRts 
 {
     struct PlayerSpendMoneyEvent
     {

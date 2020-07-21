@@ -1,4 +1,4 @@
-namespace Sources.Components.Events
+namespace InsaneOne.EcsRts
 {
     struct TakeDamageEvent
     {

@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Sources.Storing
+namespace InsaneOne.EcsRts.Storing
 {
 	[CreateAssetMenu]
 	public class GameStartData : ScriptableObject

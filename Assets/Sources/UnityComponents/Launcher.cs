@@ -1,11 +1,8 @@
+using InsaneOne.EcsRts.Storing;
 using Leopotam.Ecs;
-using Sources.Components.Events;
-using Sources.Storing;
-using Sources.Systems;
-using Sources.UI.Components.Events;
 using UnityEngine;
 
-namespace Sources.UnityComponents
+namespace InsaneOne.EcsRts
 {
     sealed class Launcher : MonoBehaviour
     {
@@ -24,7 +21,9 @@ namespace Sources.UnityComponents
             Leopotam.Ecs.UnityIntegration.EcsWorldObserver.Create(world);
             Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create(systems);
 #endif
+            // order is important
             systems.Add(new GameMatchLauncherSystem());
+            systems.Add(new AiSystem());
             
             systems.Add(new OrderingSystem());
 
@@ -38,17 +37,17 @@ namespace Sources.UnityComponents
             systems.Add(new SelectionSystem());
             
             systems.Add(new SpawnUnitsSystem());
+            systems.Add(new ChangeUnitOwnerSystem());
             systems.Add(new SearchEnemySystem());
             systems.Add(new ProcessDamageSystem());
-            systems.Add(new ChangeUnitOwnerSystem());
             systems.Add(new UnitsEffectsSystem());
             
             systems.Add(new PlayersSystem());
             systems.Add(new CameraSystem());
 
-            systems.Add(new Sources.UI.Systems.FloatingSystem()); // todo move to UI init system?
-            systems.Add(new Sources.UI.Systems.HealthbarsSystem());
-            systems.Add(new Sources.UI.Systems.GameInfoSystem());
+            systems.Add(new UI.FloatingSystem()); // todo move to UI init system?
+            systems.Add(new UI.HealthbarsSystem());
+            systems.Add(new UI.GameInfoSystem());
             
             systems.Inject(StartData);
             systems.Inject(Camera.main);
@@ -59,9 +58,10 @@ namespace Sources.UnityComponents
             systems.OneFrame<MoveOrderEvent>();
             systems.OneFrame<SpawnUnitEvent>();
             systems.OneFrame<ShootEvent>();
+            systems.OneFrame<RequestBuyUnitEvent>();
             
-            systems.OneFrame<RemoveHealthbarEvent>();
-            systems.OneFrame<AddHealthbarEvent>();
+            systems.OneFrame<UI.RemoveHealthbarEvent>();
+            systems.OneFrame<UI.AddHealthbarEvent>();
             systems.OneFrame<PlayerSpendMoneyEvent>();
             
             systems.Init();

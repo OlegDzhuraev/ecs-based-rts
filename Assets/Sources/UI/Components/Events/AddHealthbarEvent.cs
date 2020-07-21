@@ -1,6 +1,4 @@
-﻿using Sources.Components;
-
-namespace Sources.UI.Components.Events
+﻿namespace InsaneOne.EcsRts.UI
 {
 	struct AddHealthbarEvent
 	{

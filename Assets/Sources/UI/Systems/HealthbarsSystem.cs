@@ -1,13 +1,9 @@
+using InsaneOne.EcsRts.Storing;
 using Leopotam.Ecs;
-using Sources.Components;
-using Sources.Components.Events;
-using Sources.Storing;
-using Sources.UI.Components;
-using Sources.UI.Components.Events;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Sources.UI.Systems
+namespace InsaneOne.EcsRts.UI
 {
     sealed class HealthbarsSystem : IEcsRunSystem 
     {

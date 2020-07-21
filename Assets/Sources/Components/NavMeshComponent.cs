@@ -1,6 +1,6 @@
 using UnityEngine.AI;
 
-namespace Sources 
+namespace InsaneOne 
 {
     struct NavMeshComponent
     {

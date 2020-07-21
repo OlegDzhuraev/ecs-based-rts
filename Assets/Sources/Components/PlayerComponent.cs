@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Sources 
+namespace InsaneOne.EcsRts 
 {
     struct PlayerComponent
     {

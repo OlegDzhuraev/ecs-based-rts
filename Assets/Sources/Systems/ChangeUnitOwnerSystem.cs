@@ -1,10 +1,8 @@
-﻿using Leopotam.Ecs;
-using Sources.Components;
-using Sources.Components.Events;
-using Sources.Storing;
+﻿using InsaneOne.EcsRts.Storing;
+using Leopotam.Ecs;
 using UnityEngine;
 
-namespace Sources.Systems
+namespace InsaneOne.EcsRts
 {
     public class ChangeUnitOwnerSystem : IEcsRunSystem
     {
@@ -18,11 +16,18 @@ namespace Sources.Systems
         {
 	        foreach (var i in unitFilter)
 	        {
+		        var entity = unitFilter.GetEntity(i);
+		        
 		        ref var unit = ref unitFilter.Get1(i);
 		        ref var coloredRenderers = ref unitFilter.Get2(i);
 		        ref var changeUnitOwnerEvent = ref unitFilter.Get3(i);
 
 		        unit.OwnerPlayerId = changeUnitOwnerEvent.NewOwnerPlayerId;
+
+		        if (unit.OwnerPlayerId == PlayerComponent.LocalPlayerId)
+			        entity.Get<LocalPlayerOwnedTag>();
+		        else 
+					entity.Del<LocalPlayerOwnedTag>();
 		        
 		        foreach (var renderer in coloredRenderers.Renderers)
 			        renderer.material.SetColor(colorId, gameStartData.PlayerColors[unit.OwnerPlayerId]);

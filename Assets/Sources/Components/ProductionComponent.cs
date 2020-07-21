@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using Sources.Storing;
+using InsaneOne.EcsRts.Storing;
 using UnityEngine;
 
-namespace Sources 
+namespace InsaneOne.EcsRts
 {
     struct ProductionComponent
     {

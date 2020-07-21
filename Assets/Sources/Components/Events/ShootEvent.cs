@@ -1,7 +1,4 @@
-﻿namespace Sources.Components.Events
+﻿namespace InsaneOne.EcsRts
 {
-    public struct ShootEvent
-    {
-        
-    }
+    public struct ShootEvent { }
 }

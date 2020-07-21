@@ -1,10 +1,9 @@
-﻿using Leopotam.Ecs;
-using Sources.Components.Events;
-using Sources.Storing;
-using Sources.UnityComponents;
+﻿using InsaneOne.EcsRts.Storing;
+using InsaneOne.UnityComponents;
+using Leopotam.Ecs;
 using UnityEngine;
 
-namespace Sources.Systems
+namespace InsaneOne.EcsRts
 {
     public class GameMatchLauncherSystem : IEcsInitSystem
     {

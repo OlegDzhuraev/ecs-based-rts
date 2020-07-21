@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
+using InsaneOne.EcsRts.Storing;
+using InsaneOne.UnityComponents;
 using Leopotam.Ecs;
 using UnityEngine;
-using Sources.Components;
-using Sources.Components.Events;
-using Sources.Storing;
-using Sources.UnityComponents;
 using UnityEngine.AI;
 
-namespace Sources.Systems
+namespace InsaneOne.EcsRts
 {
     public class SpawnUnitsSystem : IEcsRunSystem
     {

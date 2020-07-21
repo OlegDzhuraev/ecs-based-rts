@@ -2,7 +2,7 @@ using Leopotam.Ecs;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Sources.UI.Systems
+namespace InsaneOne.EcsRts.UI
 {
     sealed class GameInfoSystem : IEcsInitSystem, IEcsRunSystem 
     {

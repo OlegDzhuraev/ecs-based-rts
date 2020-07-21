@@ -1,8 +1,7 @@
 using Leopotam.Ecs;
-using Sources.Components;
 using UnityEngine;
 
-namespace Sources.Systems
+namespace InsaneOne.EcsRts
 {
     sealed class MovableSystem : IEcsRunSystem 
     {

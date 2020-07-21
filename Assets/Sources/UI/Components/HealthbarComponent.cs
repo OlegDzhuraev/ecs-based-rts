@@ -1,8 +1,7 @@
-using Sources.Components;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Sources.UI.Components
+namespace InsaneOne.EcsRts.UI
 {
     struct HealthbarComponent
     {

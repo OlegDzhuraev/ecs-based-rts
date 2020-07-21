@@ -1,10 +1,8 @@
+using InsaneOne.EcsRts.UI;
 using Leopotam.Ecs;
 using UnityEngine;
-using Sources.Components;
-using Sources.Components.Tags;
-using Sources.UI.Components.Events;
 
-namespace Sources.Systems
+namespace InsaneOne.EcsRts
 {
     sealed class SelectionSystem : IEcsRunSystem 
     {

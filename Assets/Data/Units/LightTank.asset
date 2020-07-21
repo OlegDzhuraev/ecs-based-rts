@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2987bcf416ef5f46902a6b1411e0848, type: 3}
-  m_Name: Unit
+  m_Name: LightTank
   m_EditorClassIdentifier: 
   Prefab: {fileID: 5634468991950757750, guid: 79147a8e9968e8f4ba7296e879ff31b2, type: 3}
   Move:
@@ -28,7 +28,7 @@ MonoBehaviour:
   Production:
     CanProduceUnits: 0
     Units: []
-    SelfProduceTime: 2
+    SelfProduceTime: 5
     Price: 100
   Effects:
     ShootEffect: {fileID: 347417622014788243, guid: bcc696785c061974aaf113f6e1ce18a5,

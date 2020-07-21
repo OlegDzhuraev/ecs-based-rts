@@ -1,9 +1,8 @@
 using Leopotam.Ecs;
-using Sources.Components;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Sources 
+namespace InsaneOne.EcsRts 
 {
     sealed class NavMeshSystem : IEcsRunSystem 
     {

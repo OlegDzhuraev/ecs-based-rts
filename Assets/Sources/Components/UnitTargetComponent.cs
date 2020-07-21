@@ -1,6 +1,6 @@
 using Leopotam.Ecs;
 
-namespace Sources.Components
+namespace InsaneOne.EcsRts
 {
     /// <summary> Компонент содержит цель юнита. Если этот компонент добавлен на энтити, значит, юнит имеет цель для атаки. </summary>
     struct UnitTargetComponent

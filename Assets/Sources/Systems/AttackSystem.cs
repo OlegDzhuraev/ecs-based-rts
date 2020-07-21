@@ -1,9 +1,7 @@
 using Leopotam.Ecs;
-using Sources.Components;
-using Sources.Components.Events;
 using UnityEngine;
 
-namespace Sources.Systems
+namespace InsaneOne.EcsRts
 {
     sealed class AttackSystem : IEcsRunSystem
     {

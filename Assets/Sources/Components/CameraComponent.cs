@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Sources.Components
+namespace InsaneOne.EcsRts
 {
 	public struct CameraComponent
 	{

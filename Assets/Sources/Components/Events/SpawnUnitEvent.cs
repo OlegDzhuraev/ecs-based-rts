@@ -1,7 +1,7 @@
+using InsaneOne.EcsRts.Storing;
 using UnityEngine;
-using Sources.Storing;
 
-namespace Sources.Components.Events
+namespace InsaneOne.EcsRts
 {
     struct SpawnUnitEvent
     {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Sources.Storing
+namespace InsaneOne.EcsRts.Storing
 {
     [CreateAssetMenu]
     public class UnitData : ScriptableObject

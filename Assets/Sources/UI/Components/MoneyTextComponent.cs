@@ -1,6 +1,6 @@
 using UnityEngine.UI;
 
-namespace Sources 
+namespace InsaneOne.EcsRts.UI 
 {
     struct MoneyTextComponent
     {

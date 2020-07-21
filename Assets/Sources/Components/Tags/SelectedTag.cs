@@ -1,4 +1,4 @@
-﻿namespace Sources.Components.Tags
+﻿namespace InsaneOne.EcsRts
 {
 	public struct SelectedTag { }
 }

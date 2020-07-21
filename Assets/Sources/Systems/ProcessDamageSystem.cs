@@ -1,10 +1,8 @@
+using InsaneOne.EcsRts.UI;
 using Leopotam.Ecs;
-using Sources.Components;
-using Sources.Components.Events;
-using Sources.UI.Components.Events;
 using UnityEngine;
 
-namespace Sources.Systems
+namespace InsaneOne.EcsRts
 {
     sealed class ProcessDamageSystem : IEcsRunSystem
     {

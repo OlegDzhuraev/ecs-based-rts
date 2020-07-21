@@ -1,7 +1,7 @@
-using Sources.Storing;
+using InsaneOne.EcsRts.Storing;
 using UnityEngine;
 
-namespace Sources.Components
+namespace InsaneOne.EcsRts
 {
     struct UnitComponent
     {

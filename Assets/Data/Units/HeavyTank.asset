@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2987bcf416ef5f46902a6b1411e0848, type: 3}
+  m_Name: HeavyTank
+  m_EditorClassIdentifier: 
+  Prefab: {fileID: 5971791842157416974, guid: 114641a78922aeb4eb276abf5122a31a, type: 3}
+  Move:
+    CanMove: 1
+    MoveSpeed: 1.5
+    RotationSpeed: 270
+    StopDistance: 0.15
+  Defense:
+    MaxHealth: 150
+  Attack:
+    CanAttack: 1
+    Damage: 50
+    ReloadTime: 2.5
+    HaveTurret: 1
+  Production:
+    CanProduceUnits: 0
+    Units: []
+    SelfProduceTime: 5
+    Price: 200
+  Effects:
+    ShootEffect: {fileID: 347417622014788243, guid: bcc696785c061974aaf113f6e1ce18a5,
+      type: 3}

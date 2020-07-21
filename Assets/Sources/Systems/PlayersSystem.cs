@@ -1,6 +1,6 @@
 using Leopotam.Ecs;
 
-namespace Sources 
+namespace InsaneOne.EcsRts 
 {
     sealed class PlayersSystem : IEcsRunSystem 
     {

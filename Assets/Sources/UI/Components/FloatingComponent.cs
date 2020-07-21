@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Sources.UI.Components
+namespace InsaneOne.EcsRts.UI
 {
     struct FloatingComponent
     {

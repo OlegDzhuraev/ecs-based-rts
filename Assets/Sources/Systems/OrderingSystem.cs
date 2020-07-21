@@ -1,8 +1,7 @@
 using Leopotam.Ecs;
-using Sources.Components.Tags;
 using UnityEngine;
 
-namespace Sources 
+namespace InsaneOne.EcsRts 
 {
     sealed class OrderingSystem : IEcsRunSystem 
     {

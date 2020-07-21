@@ -1,11 +1,7 @@
 using Leopotam.Ecs;
-using Sources.Components;
-using Sources.Components.Events;
-using Sources.Components.Tags;
-using Sources.Storing;
 using UnityEngine;
 
-namespace Sources 
+namespace InsaneOne.EcsRts 
 {
     sealed class ProductionSystem : IEcsRunSystem 
     {
@@ -14,8 +10,44 @@ namespace Sources
         readonly EcsFilter<ProductionComponent, SelectedTag> selectedFilter = null;
         
         readonly EcsFilter<PlayerComponent> playersFilter = null;
+        readonly EcsFilter<UnitComponent, ProductionComponent, RequestBuyUnitEvent> buyRequestsFilter = null;
         
         void IEcsRunSystem.Run ()
+        {
+            foreach (var i in selectedFilter)
+                DebugKeysInput(ref filter.GetEntity(i), ref filter.Get1(i));
+            
+            HandleBuyRequests();
+            HandleQueue();
+        }
+
+        void HandleBuyRequests()
+        {
+            foreach (var i in buyRequestsFilter)
+            {   
+                ref var unit = ref buyRequestsFilter.Get1(i);
+                ref var production = ref buyRequestsFilter.Get2(i);
+                ref var request = ref buyRequestsFilter.Get3(i);
+
+                var unitData = request.UnitData;
+
+                foreach (var q in playersFilter)
+                {
+                    ref var player = ref playersFilter.Get1(q);
+                    var playerEntity = playersFilter.GetEntity(q);
+                  
+                    if (unit.OwnerPlayerId != player.Id || player.Money < unitData.Production.Price)
+                        continue;
+                  
+                    playerEntity.Get<PlayerSpendMoneyEvent>().Value = unitData.Production.Price;
+                    production.Queue.Add(unitData);
+
+                    break;
+                }
+            }
+        }
+        
+        void HandleQueue()
         {
             foreach (var i in filter)
             {
@@ -36,9 +68,6 @@ namespace Sources
                     MoveQueue(ref production);
                 }
             }
-
-            foreach (var i in selectedFilter)
-                DebugKeysInput(ref filter.Get2(i), ref filter.Get1(i));
         }
 
         void ProduceUnit(ref ProductionComponent production, int ownedBy)
@@ -60,34 +89,13 @@ namespace Sources
             production.Queue.RemoveAt(0);
         }
 
-        void AddToQueue(ref UnitComponent productionUnit, ref ProductionComponent production, UnitData unit)
-        {
-            foreach (var i in playersFilter)
-            {
-                ref var player = ref playersFilter.Get1(i);
-               
-                if (player.Id != productionUnit.OwnerPlayerId)
-                    continue;
-                
-                if (player.Money >= unit.Production.Price)
-                {
-                    playersFilter.GetEntity(i).Get<PlayerSpendMoneyEvent>().Value = unit.Production.Price;
-                    production.Queue.Add(unit);
-                    
-                    break;
-                }
-            }
-        }
-        
-        void DebugKeysInput(ref UnitComponent productionUnit, ref ProductionComponent production)
+        void DebugKeysInput(ref EcsEntity productionEnt, ref ProductionComponent production)
         {
             var unitsCount = Mathf.Min(production.Data.Units.Length, 9);
-            
+
             for (int i = 1; i <= unitsCount; i++)
-            {
                 if (Input.GetKeyDown(i.ToString()))
-                    AddToQueue(ref productionUnit, ref production, production.Data.Units[i - 1]);
-            }
+                    productionEnt.Get<RequestBuyUnitEvent>().UnitData = production.Data.Units[i - 1];
         }
     }
 }
