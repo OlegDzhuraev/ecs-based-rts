@@ -28,7 +28,7 @@ namespace InsaneOne.EcsRts
                 ref var playerComponent = ref world.NewEntity().Get<PlayerComponent>();
 
                 playerComponent.Id = i;
-                playerComponent.Money = startData.StartMoney;
+                playerComponent.Resources = startData.StartMoney;
                 playerComponent.Color = startData.PlayerColors[i];
                 
                 SpawnPlayerUnit(i);

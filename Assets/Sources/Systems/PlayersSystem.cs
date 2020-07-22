@@ -4,7 +4,8 @@ namespace InsaneOne.EcsRts
 {
     sealed class PlayersSystem : IEcsRunSystem 
     {
-        readonly EcsFilter<PlayerComponent, PlayerSpendMoneyEvent> spendMoneyFilter = null;
+        readonly EcsFilter<PlayerComponent, SpendResourcesEvent> spendMoneyFilter = null;
+        readonly EcsFilter<PlayerComponent, AddResourcesEvent> addMoneyFilter = null;
 
         void IEcsRunSystem.Run ()
         {
@@ -13,7 +14,15 @@ namespace InsaneOne.EcsRts
                 ref var player = ref spendMoneyFilter.Get1(i);
                 ref var spendEvent = ref spendMoneyFilter.Get2(i);
 
-                player.Money -= spendEvent.Value;
+                player.Resources -= spendEvent.Value;
+            }
+            
+            foreach (var i in addMoneyFilter)
+            {
+                ref var player = ref addMoneyFilter.Get1(i);
+                ref var addEvent = ref addMoneyFilter.Get2(i);
+
+                player.Resources += addEvent.Value;
             }
         }
     }

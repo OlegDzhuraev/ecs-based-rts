@@ -9,7 +9,8 @@ namespace InsaneOne.EcsRts.UI
         readonly EcsWorld world = null;
         
         readonly EcsFilter<MoneyTextComponent> filter = null;
-        readonly EcsFilter<PlayerComponent, PlayerSpendMoneyEvent> spendMoneyFilter = null;
+        readonly EcsFilter<PlayerComponent, SpendResourcesEvent> spendMoneyFilter = null;
+        readonly EcsFilter<PlayerComponent, AddResourcesEvent> addMoneyFilter = null;
         readonly EcsFilter<PlayerComponent> playersFilter = null;
         
         void IEcsInitSystem.Init()
@@ -26,7 +27,7 @@ namespace InsaneOne.EcsRts.UI
                 if (player.Id == PlayerComponent.LocalPlayerId)
                 {
                     moneyText.PlayerId = player.Id;
-                    SetText(ref moneyText, player.Money);
+                    SetText(ref moneyText, player.Resources);
 
                     break;
                 }
@@ -39,16 +40,28 @@ namespace InsaneOne.EcsRts.UI
             {
                 ref var player = ref spendMoneyFilter.Get1(i);
 
-                foreach (var w in filter)
-                {
-                    ref var moneyText = ref filter.Get1(w);
-                    
-                    if (player.Id == moneyText.PlayerId)
-                        SetText(ref moneyText, player.Money);
-                }
+                UpdatePlayerMoneyText(player.Id, player.Resources);
+            }
+            
+            foreach (var i in addMoneyFilter)
+            {
+                ref var player = ref addMoneyFilter.Get1(i);
+
+                UpdatePlayerMoneyText(player.Id, player.Resources);
             }
         }
 
-        void SetText(ref MoneyTextComponent money, int value) => money.Text.text = "Money: $" + value;
+        void UpdatePlayerMoneyText(int playerId, float money)
+        {
+            foreach (var w in filter)
+            {
+                ref var moneyText = ref filter.Get1(w);
+                    
+                if (playerId == moneyText.PlayerId)
+                    SetText(ref moneyText, money);
+            }
+        }
+
+        void SetText(ref MoneyTextComponent money, float value) => money.Text.text = "Money: $" + Mathf.RoundToInt(value);
     }
 }

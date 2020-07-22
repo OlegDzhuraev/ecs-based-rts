@@ -8,7 +8,7 @@ namespace InsaneOne.EcsRts
     {
 	    readonly GameStartData gameStartData;
 	    
-	    readonly EcsFilter<UnitComponent, ColoredRenderers, ChangeUnitOwnerEvent> unitFilter = null;
+	    readonly EcsFilter<UnitComponent, ColoredRenderersComponent, ChangeUnitOwnerEvent> unitFilter = null;
 	    
 	    static readonly int colorId = Shader.PropertyToID("_Color");
 

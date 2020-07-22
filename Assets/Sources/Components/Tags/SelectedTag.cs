@@ -1,4 +1,6 @@
-﻿namespace InsaneOne.EcsRts
+﻿using Leopotam.Ecs;
+
+namespace InsaneOne.EcsRts
 {
-	public struct SelectedTag { }
+	public struct SelectedTag : IEcsIgnoreInFilter { }
 }

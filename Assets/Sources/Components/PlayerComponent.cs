@@ -7,7 +7,7 @@ namespace InsaneOne.EcsRts
         public const int LocalPlayerId = 0;
         
         public int Id;
-        public int Money;
+        public float Resources;
         public Color Color;
     }
 }

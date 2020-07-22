@@ -20,7 +20,10 @@ namespace InsaneOne.EcsRts.Storing
         public ProductionData Production;
         
         [Header("Effects parameters")]
-        public EffectsData Effects;
+        public EffectsData Effects;      
+        
+        [Header("Harvest parameters")]
+        public HarvestData Harvest;
     }
 
     [System.Serializable]
@@ -54,6 +57,14 @@ namespace InsaneOne.EcsRts.Storing
         public float Damage;
         public float ReloadTime;
         public bool HaveTurret;
+    }
+    
+    [System.Serializable]
+    public struct HarvestData
+    {
+        public bool CanHarvest;
+        public float HarvestSpeed;
+        public int MaxResourcesAmount;
     }
     
     [System.Serializable]

@@ -36,10 +36,10 @@ namespace InsaneOne.EcsRts
                     ref var player = ref playersFilter.Get1(q);
                     var playerEntity = playersFilter.GetEntity(q);
                   
-                    if (unit.OwnerPlayerId != player.Id || player.Money < unitData.Production.Price)
+                    if (unit.OwnerPlayerId != player.Id || player.Resources < unitData.Production.Price)
                         continue;
                   
-                    playerEntity.Get<PlayerSpendMoneyEvent>().Value = unitData.Production.Price;
+                    playerEntity.Get<SpendResourcesEvent>().Value = unitData.Production.Price;
                     production.Queue.Add(unitData);
 
                     break;

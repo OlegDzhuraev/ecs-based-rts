@@ -1,6 +1,6 @@
 namespace InsaneOne.EcsRts 
 {
-    struct PlayerSpendMoneyEvent
+    struct AddResourcesEvent
     {
         public int Value;
     }

@@ -37,7 +37,7 @@ namespace InsaneOne.EcsRts
             unit.DefenseData = data.Defense;
             unit.Health = unit.DefenseData.MaxHealth;
 
-            ref var coloredRenderers = ref unitEntitiy.Get<ColoredRenderers>();
+            ref var coloredRenderers = ref unitEntitiy.Get<ColoredRenderersComponent>();
             coloredRenderers.Renderers = unitParts.ColoredRenderers;
 
             ref var effects = ref unitEntitiy.Get<EffectsComponent>();
@@ -83,6 +83,14 @@ namespace InsaneOne.EcsRts
                 production.Data = data.Production;
                 production.SpawnPoint = spawnedObject.transform.position + spawnedObject.transform.forward * 2f; // todo replace this hardcode
                 production.Queue = new List<UnitData>();
+            }
+
+            if (data.Harvest.CanHarvest)
+            {
+                ref var harvester = ref unitEntitiy.Get<HarvesterComponent>();
+                
+                harvester.GiveResourcesPoint = spawnedObject.transform.position; // todo replace this temporary point
+                harvester.Data = data.Harvest;
             }
             
             unitEntitiy.Get<ChangeUnitOwnerEvent>().NewOwnerPlayerId = spawnUnitEvent.OwnerPlayerId;

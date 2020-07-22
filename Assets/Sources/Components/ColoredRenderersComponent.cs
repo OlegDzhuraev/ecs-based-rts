@@ -2,7 +2,7 @@
 
 namespace InsaneOne.EcsRts
 {
-    public struct ColoredRenderers
+    public struct ColoredRenderersComponent
     {
         public Renderer[] Renderers;
     }

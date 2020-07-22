@@ -26,7 +26,6 @@ namespace InsaneOne.EcsRts
                         attackComponent.IsReloading = false;
                     
                     continue;
-               
                 }
 
                 unitEntity.Get<ShootEvent>();

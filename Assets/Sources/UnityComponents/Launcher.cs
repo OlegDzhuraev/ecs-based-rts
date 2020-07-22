@@ -1,13 +1,14 @@
 using InsaneOne.EcsRts.Storing;
 using Leopotam.Ecs;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace InsaneOne.EcsRts
 {
     sealed class Launcher : MonoBehaviour
     {
         [SerializeField] GameStartData StartData;
-        [SerializeField] Canvas uiCanvas;
+        [SerializeField] Canvas UICanvas;
         
         EcsWorld world;
         EcsSystems systems;
@@ -30,6 +31,7 @@ namespace InsaneOne.EcsRts
             systems.Add(new MovableSystem());
             systems.Add(new TurretSystem());
             systems.Add(new AttackSystem());
+            systems.Add(new HarvestingSystem());
            
             systems.Add(new NavMeshSystem());
             systems.Add(new ProductionSystem());
@@ -51,7 +53,7 @@ namespace InsaneOne.EcsRts
             
             systems.Inject(StartData);
             systems.Inject(Camera.main);
-            systems.Inject(uiCanvas);
+            systems.Inject(UICanvas);
 
             systems.OneFrame<TakeDamageEvent>();
             systems.OneFrame<ChangeUnitOwnerEvent>();
@@ -62,7 +64,8 @@ namespace InsaneOne.EcsRts
             
             systems.OneFrame<UI.RemoveHealthbarEvent>();
             systems.OneFrame<UI.AddHealthbarEvent>();
-            systems.OneFrame<PlayerSpendMoneyEvent>();
+            systems.OneFrame<SpendResourcesEvent>();
+            systems.OneFrame<AddResourcesEvent>();
             
             systems.Init();
         }

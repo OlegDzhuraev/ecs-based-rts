@@ -10,31 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2987bcf416ef5f46902a6b1411e0848, type: 3}
-  m_Name: Production
+  m_Name: Harvester
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 1700406999934802745, guid: 43c9d1c33074da6478d9d5d9be17a2ad, type: 3}
+  Prefab: {fileID: 1643491998678053683, guid: e6e9ff99c26bb6240a4c0f66e8697db3, type: 3}
   Move:
-    CanMove: 0
+    CanMove: 1
     MoveSpeed: 2
     RotationSpeed: 360
     StopDistance: 0.15
   Defense:
-    MaxHealth: 300
+    MaxHealth: 125
   Attack:
     CanAttack: 0
-    Damage: 25
-    ReloadTime: 2
+    Damage: 50
+    ReloadTime: 2.5
     HaveTurret: 0
   Production:
-    CanProduceUnits: 1
-    Units:
-    - {fileID: 11400000, guid: cfed167da7488cd4997c6b6ac4ff9de5, type: 2}
-    - {fileID: 11400000, guid: 084dfcc50fbb2e34295fcab66098c682, type: 2}
-    - {fileID: 11400000, guid: 5c3659c6869e6e84fa4bd34eb960178a, type: 2}
-    SelfProduceTime: 0
-    Price: 250
+    CanProduceUnits: 0
+    Units: []
+    SelfProduceTime: 4
+    Price: 75
   Effects:
     ShootEffect: {fileID: 0}
   Harvest:
-    CanHarvest: 0
-    MaxResourcesAmount: 0
+    CanHarvest: 1
+    HarvestSpeed: 20
+    MaxResourcesAmount: 60
