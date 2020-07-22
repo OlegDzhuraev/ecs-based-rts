@@ -17,7 +17,7 @@ namespace InsaneOne.EcsRts
         bool mouseInputOn;
 
         Vector2 screenSize, screenCenter;
-        Rect borderedScreenRect;
+        Rect borderedScreenRect, screenRect;
         
         public void Init()
         {
@@ -37,6 +37,7 @@ namespace InsaneOne.EcsRts
             screenCenter = screenSize / 2f;
             
             borderedScreenRect = new Rect(startPoint, size);
+            screenRect = new Rect(Vector2.zero, screenSize);
         }
         
         void IEcsRunSystem.Run ()
@@ -77,7 +78,7 @@ namespace InsaneOne.EcsRts
         {
             var mousePosition = Input.mousePosition;
             
-            if (borderedScreenRect.Contains(mousePosition))
+            if (borderedScreenRect.Contains(mousePosition) || !screenRect.Contains(mousePosition))
                 return Vector3.zero;
             
             var realInput = GetOffsettedInput(Input.mousePosition, screenCenter);
