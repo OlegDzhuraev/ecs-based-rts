@@ -15,8 +15,6 @@ namespace InsaneOne.EcsRts
         readonly EcsFilter<HarvesterComponent, UnitComponent, HarvesterGiveResourcesTag> giveResourcesFilter = null;
        
         readonly EcsFilter<ResourceFieldComponent, SpendResourcesEvent>.Exclude<ResourcesFieldEmptyTag> resourceFieldsFilter = null;
-        
-        readonly EcsFilter<PlayerComponent> playersFilter = null;
 
         readonly List<Transform> actualFieldsTransforms = new List<Transform>();
         readonly List<EcsEntity> actualFields = new List<EcsEntity>();
@@ -122,14 +120,8 @@ namespace InsaneOne.EcsRts
                 if (Vector3.Distance(unit.Position, harvester.GiveResourcesPoint) > 1f)
                     continue;
                 
-                foreach (var w in playersFilter)
-                {
-                    ref var player = ref playersFilter.Get1(w);
+                unit.OwnerPlayer.Get<AddResourcesEvent>().Value = (int) harvester.ResourcesAmount;
 
-                    if (player.Id == unit.OwnerPlayerId)
-                        playersFilter.GetEntity(i).Get<AddResourcesEvent>().Value = (int) harvester.ResourcesAmount;
-                }
-                
                 harvester.ResourcesAmount = 0;
                 entity.Del<HarvesterGiveResourcesTag>();
             }

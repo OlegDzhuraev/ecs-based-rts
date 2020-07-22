@@ -8,8 +8,7 @@ namespace InsaneOne.EcsRts
         readonly EcsWorld world = null;
         readonly EcsFilter<ProductionComponent, UnitComponent> filter = null;
         readonly EcsFilter<ProductionComponent, SelectedTag> selectedFilter = null;
-        
-        readonly EcsFilter<PlayerComponent> playersFilter = null;
+
         readonly EcsFilter<UnitComponent, ProductionComponent, RequestBuyUnitEvent> buyRequestsFilter = null;
         
         void IEcsRunSystem.Run ()
@@ -31,19 +30,11 @@ namespace InsaneOne.EcsRts
 
                 var unitData = request.UnitData;
 
-                foreach (var q in playersFilter)
-                {
-                    ref var player = ref playersFilter.Get1(q);
-                    var playerEntity = playersFilter.GetEntity(q);
-                  
-                    if (unit.OwnerPlayerId != player.Id || player.Resources < unitData.Production.Price)
-                        continue;
-                  
-                    playerEntity.Get<SpendResourcesEvent>().Value = unitData.Production.Price;
-                    production.Queue.Add(unitData);
-
-                    break;
-                }
+                if (unit.OwnerPlayer.Get<PlayerComponent>().Resources < unitData.Production.Price) // todo check, is it correct to check component here way like this?
+                    continue;
+                
+                unit.OwnerPlayer.Get<SpendResourcesEvent>().Value = unitData.Production.Price;
+                production.Queue.Add(unitData);
             }
         }
         

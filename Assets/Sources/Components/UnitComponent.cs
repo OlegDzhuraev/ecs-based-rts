@@ -1,4 +1,5 @@
 using InsaneOne.EcsRts.Storing;
+using Leopotam.Ecs;
 using UnityEngine;
 
 namespace InsaneOne.EcsRts
@@ -14,5 +15,6 @@ namespace InsaneOne.EcsRts
         public float Health;
 
         public int OwnerPlayerId;
+        public EcsEntity OwnerPlayer;
     }
 }

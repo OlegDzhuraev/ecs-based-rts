@@ -92,8 +92,10 @@ namespace InsaneOne.EcsRts
                 harvester.GiveResourcesPoint = spawnedObject.transform.position; // todo replace this temporary point
                 harvester.Data = data.Harvest;
             }
-            
-            unitEntitiy.Get<ChangeUnitOwnerEvent>().NewOwnerPlayerId = spawnUnitEvent.OwnerPlayerId;
+
+            ref var changeOwnerEvent = ref unitEntitiy.Get<ChangeUnitOwnerEvent>();
+            changeOwnerEvent.NewOwnerPlayerEntity = spawnUnitEvent.OwnerPlayer;
+            changeOwnerEvent.NewOwnerPlayerId = spawnUnitEvent.OwnerPlayerId;
         }
     }
 }

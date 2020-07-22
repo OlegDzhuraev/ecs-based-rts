@@ -22,6 +22,7 @@ namespace InsaneOne.EcsRts
 		        ref var coloredRenderers = ref unitFilter.Get2(i);
 		        ref var changeUnitOwnerEvent = ref unitFilter.Get3(i);
 
+		        unit.OwnerPlayer = changeUnitOwnerEvent.NewOwnerPlayerEntity;
 		        unit.OwnerPlayerId = changeUnitOwnerEvent.NewOwnerPlayerId;
 
 		        if (unit.OwnerPlayerId == PlayerComponent.LocalPlayerId)

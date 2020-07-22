@@ -25,17 +25,18 @@ namespace InsaneOne.EcsRts
         {
             for (var i = 0; i < startData.StartPlayersCount; i++)
             {
-                ref var playerComponent = ref world.NewEntity().Get<PlayerComponent>();
+                var playerEntity = world.NewEntity();
+                ref var playerComponent = ref playerEntity.Get<PlayerComponent>();
 
                 playerComponent.Id = i;
                 playerComponent.Resources = startData.StartMoney;
                 playerComponent.Color = startData.PlayerColors[i];
                 
-                SpawnPlayerUnit(i);
+                SpawnPlayerUnit(playerEntity, i);
             }
         }
 
-        void SpawnPlayerUnit(int playerId)
+        void SpawnPlayerUnit(EcsEntity playerEntity, int playerId)
         {
             for (var i = 0; i < spawnPoints.Length; i++)
             {
@@ -44,8 +45,10 @@ namespace InsaneOne.EcsRts
                 {
                     ref var spawnEvent = ref world.NewEntity().Get<SpawnUnitEvent>();
 
+                    spawnEvent.OwnerPlayer = playerEntity;
+                    spawnEvent.OwnerPlayerId = playerId;
+                    
                     spawnEvent.Position = point.transform.position;
-                    spawnEvent.OwnerPlayerId = point.PlayerId;
                     spawnEvent.UnitToSpawnData = startData.StartUnit;
 
                     GameObject.Destroy(point);
