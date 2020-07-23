@@ -1,6 +1,6 @@
 namespace InsaneOne.EcsRts 
 {
-    struct SpendResourcesEvent
+    struct SpendPlayerResourcesEvent
     {
         public float Value;
     }

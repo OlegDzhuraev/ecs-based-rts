@@ -14,7 +14,7 @@ namespace InsaneOne.EcsRts
         readonly EcsFilter<HarvesterComponent, UnitComponent, HarvestingTag> harvestingFilter = null;
         readonly EcsFilter<HarvesterComponent, UnitComponent, HarvesterGiveResourcesTag> giveResourcesFilter = null;
        
-        readonly EcsFilter<ResourceFieldComponent, SpendResourcesEvent>.Exclude<ResourcesFieldEmptyTag> resourceFieldsFilter = null;
+        readonly EcsFilter<ResourceFieldComponent, SpendFieldResourcesEvent>.Exclude<ResourcesFieldEmptyTag> resourceFieldsFilter = null;
 
         readonly List<Transform> actualFieldsTransforms = new List<Transform>();
         readonly List<EcsEntity> actualFields = new List<EcsEntity>();
@@ -100,7 +100,7 @@ namespace InsaneOne.EcsRts
                 }
                 else
                 {
-                    harvester.SelectedFieldEntity.Get<SpendResourcesEvent>().Value = harvester.ResourcesAmount;
+                    harvester.SelectedFieldEntity.Get<SpendFieldResourcesEvent>().Value = harvester.ResourcesAmount;
                     
                     entity.Del<HarvestingTag>();
                     entity.Get<HarvesterGiveResourcesTag>();
@@ -120,7 +120,8 @@ namespace InsaneOne.EcsRts
                 if (Vector3.Distance(unit.Position, harvester.GiveResourcesPoint) > 1f)
                     continue;
                 
-                unit.OwnerPlayer.Get<AddResourcesEvent>().Value = (int) harvester.ResourcesAmount;
+                // todo check why it OwnerPlayer cn be null, it should exist all time.
+                unit.OwnerPlayer.Get<AddPlayerResourcesEvent>().Value = (int) harvester.ResourcesAmount;
 
                 harvester.ResourcesAmount = 0;
                 entity.Del<HarvesterGiveResourcesTag>();

@@ -41,7 +41,6 @@ namespace InsaneOne.EcsRts
             systems.Add(new SpawnUnitsSystem());
             systems.Add(new ChangeUnitOwnerSystem());
             systems.Add(new SearchEnemySystem());
-            systems.Add(new ProcessDamageSystem());
             systems.Add(new UnitsEffectsSystem());
             
             systems.Add(new PlayersSystem());
@@ -50,6 +49,8 @@ namespace InsaneOne.EcsRts
             systems.Add(new UI.FloatingSystem()); // todo move to UI init system?
             systems.Add(new UI.HealthbarsSystem());
             systems.Add(new UI.GameInfoSystem());
+            
+            systems.Add(new ProcessDamageSystem());
             
             systems.Inject(StartData);
             systems.Inject(Camera.main);
@@ -64,8 +65,9 @@ namespace InsaneOne.EcsRts
             
             systems.OneFrame<UI.RemoveHealthbarEvent>();
             systems.OneFrame<UI.AddHealthbarEvent>();
-            systems.OneFrame<SpendResourcesEvent>();
-            systems.OneFrame<AddResourcesEvent>();
+            systems.OneFrame<SpendPlayerResourcesEvent>();
+            systems.OneFrame<SpendFieldResourcesEvent>();
+            systems.OneFrame<AddPlayerResourcesEvent>();
             
             systems.Init();
         }

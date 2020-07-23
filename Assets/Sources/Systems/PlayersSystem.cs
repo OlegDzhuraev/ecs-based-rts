@@ -4,8 +4,8 @@ namespace InsaneOne.EcsRts
 {
     sealed class PlayersSystem : IEcsRunSystem 
     {
-        readonly EcsFilter<PlayerComponent, SpendResourcesEvent> spendMoneyFilter = null;
-        readonly EcsFilter<PlayerComponent, AddResourcesEvent> addMoneyFilter = null;
+        readonly EcsFilter<PlayerComponent, SpendPlayerResourcesEvent> spendMoneyFilter = null;
+        readonly EcsFilter<PlayerComponent, AddPlayerResourcesEvent> addMoneyFilter = null;
 
         void IEcsRunSystem.Run ()
         {

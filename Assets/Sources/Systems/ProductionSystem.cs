@@ -33,7 +33,7 @@ namespace InsaneOne.EcsRts
                 if (unit.OwnerPlayer.Get<PlayerComponent>().Resources < unitData.Production.Price) // todo check, is it correct to check component here way like this?
                     continue;
                 
-                unit.OwnerPlayer.Get<SpendResourcesEvent>().Value = unitData.Production.Price;
+                unit.OwnerPlayer.Get<SpendPlayerResourcesEvent>().Value = unitData.Production.Price;
                 production.Queue.Add(unitData);
             }
         }

@@ -9,8 +9,8 @@ namespace InsaneOne.EcsRts.UI
         readonly EcsWorld world = null;
         
         readonly EcsFilter<MoneyTextComponent> filter = null;
-        readonly EcsFilter<PlayerComponent, SpendResourcesEvent> spendMoneyFilter = null;
-        readonly EcsFilter<PlayerComponent, AddResourcesEvent> addMoneyFilter = null;
+        readonly EcsFilter<PlayerComponent, SpendPlayerResourcesEvent> spendMoneyFilter = null;
+        readonly EcsFilter<PlayerComponent, AddPlayerResourcesEvent> addMoneyFilter = null;
         readonly EcsFilter<PlayerComponent> playersFilter = null;
         
         void IEcsInitSystem.Init()

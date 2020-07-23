@@ -414,7 +414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartData: {fileID: 11400000, guid: e87b640a017575041af70bb0b6acb623, type: 2}
-  uiCanvas: {fileID: 786352511}
+  UICanvas: {fileID: 786352511}
 --- !u!4 &772076625
 Transform:
   m_ObjectHideFlags: 0
