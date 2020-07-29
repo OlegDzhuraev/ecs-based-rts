@@ -1,6 +1,7 @@
 using InsaneOne.EcsRts.UI;
 using Leopotam.Ecs;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace InsaneOne.EcsRts
 {
@@ -14,7 +15,7 @@ namespace InsaneOne.EcsRts
         
         void IEcsRunSystem.Run()
         {
-            if (!Input.GetMouseButtonDown(0))
+            if (!Input.GetMouseButtonDown(0) || EventSystem.current.IsPointerOverGameObject())
                 return;
 
             foreach (var i in selectedFilter)
@@ -22,6 +23,7 @@ namespace InsaneOne.EcsRts
                 ref var unit = ref selectedFilter.Get2(i);
 
                 world.NewEntity().Get<RemoveHealthbarEvent>().FromUnit = unit;
+                world.NewEntity().Get<HideBuyButtonsEvent>();
                 
                 selectedFilter.GetEntity(i).Del<SelectedTag>();
             }
@@ -42,6 +44,14 @@ namespace InsaneOne.EcsRts
                         entity.Get<SelectedTag>();
                         
                         world.NewEntity().Get<AddHealthbarEvent>().ToUnit = unitComponent;
+
+                        if (entity.Has<ProductionComponent>())
+                        {
+                            ref var showButtonsEvent = ref world.NewEntity().Get<ShowBuyButtonsEvent>();
+                            
+                            showButtonsEvent.ProductionEntity = entity;
+                            showButtonsEvent.Production = entity.Get<ProductionComponent>();
+                        }
                     }
                 }
             }

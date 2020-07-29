@@ -121,7 +121,8 @@ namespace InsaneOne.EcsRts
                     continue;
                 
                 // todo check why it OwnerPlayer cn be null, it should exist all time.
-                unit.OwnerPlayer.Get<AddPlayerResourcesEvent>().Value = (int) harvester.ResourcesAmount;
+                if (unit.OwnerPlayer.IsAlive())
+                    unit.OwnerPlayer.Get<AddPlayerResourcesEvent>().Value = (int) harvester.ResourcesAmount;
 
                 harvester.ResourcesAmount = 0;
                 entity.Del<HarvesterGiveResourcesTag>();

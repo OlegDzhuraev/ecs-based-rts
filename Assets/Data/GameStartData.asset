@@ -23,3 +23,5 @@ MonoBehaviour:
   - {r: 0.9, g: 0.8, b: 0.4, a: 1}
   HealthbarTemplate: {fileID: 5943988390094617408, guid: 57f27ea4684cd4140a503da4f72cade7,
     type: 3}
+  BuyButtonTemplate: {fileID: 5536427824171167809, guid: da5c73478347e094191797d909baa7ad,
+    type: 3}

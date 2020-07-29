@@ -26,5 +26,6 @@ namespace InsaneOne.EcsRts.Storing
 
 		[Header("UI Templates")] 
 		public GameObject HealthbarTemplate;
+		public GameObject BuyButtonTemplate;
 	}
 }

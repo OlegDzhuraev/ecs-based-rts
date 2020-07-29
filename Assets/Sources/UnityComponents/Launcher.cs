@@ -45,13 +45,14 @@ namespace InsaneOne.EcsRts
             
             systems.Add(new PlayersSystem());
             systems.Add(new CameraSystem());
-
-            systems.Add(new UI.FloatingSystem()); // todo move to UI init system?
-            systems.Add(new UI.HealthbarsSystem());
-            systems.Add(new UI.GameInfoSystem());
             
             systems.Add(new ProcessDamageSystem());
             
+            systems.Add(new UI.FloatingSystem()); // todo move to UI init system?
+            systems.Add(new UI.HealthbarsSystem());
+            systems.Add(new UI.GameInfoSystem());
+            systems.Add(new UI.BuyButtonsSystem());
+
             systems.Inject(StartData);
             systems.Inject(Camera.main);
             systems.Inject(UICanvas);
@@ -65,10 +66,12 @@ namespace InsaneOne.EcsRts
             
             systems.OneFrame<UI.RemoveHealthbarEvent>();
             systems.OneFrame<UI.AddHealthbarEvent>();
+            systems.OneFrame<UI.HideBuyButtonsEvent>();
+            systems.OneFrame<UI.ShowBuyButtonsEvent>();
             systems.OneFrame<SpendPlayerResourcesEvent>();
             systems.OneFrame<SpendFieldResourcesEvent>();
             systems.OneFrame<AddPlayerResourcesEvent>();
-            
+
             systems.Init();
         }
 
