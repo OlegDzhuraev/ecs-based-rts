@@ -15,7 +15,7 @@ MonoBehaviour:
   Prefab: {fileID: 1643491998678053683, guid: e6e9ff99c26bb6240a4c0f66e8697db3, type: 3}
   Move:
     CanMove: 1
-    MoveSpeed: 2
+    MoveSpeed: 1
     RotationSpeed: 360
     StopDistance: 0.15
   Defense:

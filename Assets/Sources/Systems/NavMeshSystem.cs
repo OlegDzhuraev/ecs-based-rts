@@ -1,13 +1,11 @@
 using Leopotam.Ecs;
-using UnityEngine;
-using UnityEngine.AI;
 
 namespace InsaneOne.EcsRts 
 {
     sealed class NavMeshSystem : IEcsRunSystem 
     {
         readonly EcsWorld world;
-        readonly EcsFilter<NavMeshComponent, MovableComponent, MoveOrderEvent> ordersFilter = null;
+        readonly EcsFilter<MovableComponent, MoveOrderEvent> ordersFilter = null;
         readonly EcsFilter<NavMeshComponent, MovableComponent> moveFilter = null;
         
         void IEcsRunSystem.Run ()
@@ -20,20 +18,10 @@ namespace InsaneOne.EcsRts
         {
             foreach (var i in ordersFilter)
             {
-                ref var navMeshComponent = ref ordersFilter.Get1(i);
-                ref var movableComponent = ref ordersFilter.Get2(i);
-                ref var moveOrderEvent = ref ordersFilter.Get3(i);
-
-                var path = new NavMeshPath();
-
-                var isGenerated = NavMesh.CalculatePath(movableComponent.Transform.position,
-                    moveOrderEvent.DestinationPosition, NavMesh.AllAreas, path);
-
-                if (isGenerated)
-                {
-                    navMeshComponent.Path = path;
-                    navMeshComponent.CurrentPoint = 0;
-                }
+                ref var movableComponent = ref ordersFilter.Get1(i);
+                ref var moveOrderEvent = ref ordersFilter.Get2(i);
+                
+                movableComponent.Destination = moveOrderEvent.DestinationPosition;
             }
         }
 
@@ -41,18 +29,11 @@ namespace InsaneOne.EcsRts
         {
             foreach (var i in moveFilter)
             {
-                ref var navMeshComponent = ref ordersFilter.Get1(i);
-                ref var movableComponent = ref ordersFilter.Get2(i);
+                ref var navMeshComponent = ref moveFilter.Get1(i);
+                ref var movableComponent = ref moveFilter.Get2(i);
 
-                if (navMeshComponent.Path == null ||
-                    navMeshComponent.CurrentPoint >= navMeshComponent.Path.corners.Length)
-                    continue;
-
-                var pointPosition = navMeshComponent.Path.corners[navMeshComponent.CurrentPoint];
-                movableComponent.Destination = pointPosition;
-
-                if (Vector3.Distance(movableComponent.Transform.position, pointPosition) < 0.75f)
-                    navMeshComponent.CurrentPoint++;
+                var direction = (movableComponent.Destination - movableComponent.Transform.position).normalized;
+                navMeshComponent.NavMeshAgent.velocity = direction;
             }
         }
     }

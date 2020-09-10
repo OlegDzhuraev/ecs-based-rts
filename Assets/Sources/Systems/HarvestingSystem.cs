@@ -60,6 +60,8 @@ namespace InsaneOne.EcsRts
                     
                     actualFieldsTransforms.Remove(field.Transform);
                     actualFields.Remove(resourceFieldsFilter.GetEntity(i));
+                    
+                    resourceFieldsFilter.GetEntity(i).Destroy(); // to exclude this from search, temporary, in future use ResourcesFieldEmptyTag only
                 }
             }
         }
@@ -74,7 +76,7 @@ namespace InsaneOne.EcsRts
                 
                 var fieldTransform = unit.Transform.position.GetNearestObjectOfType(actualFieldsTransforms);
                 var id = actualFieldsTransforms.IndexOf(fieldTransform);
-
+                
                 harvester.SelectedFieldEntity = actualFields[id];
                 harvester.SelectedFieldPos = fieldTransform.position;
                 harvEnt.Get<MoveOrderEvent>().DestinationPosition = fieldTransform.position;

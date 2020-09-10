@@ -26,10 +26,16 @@ namespace InsaneOne.EcsRts
 		        unit.OwnerPlayerId = changeUnitOwnerEvent.NewOwnerPlayerId;
 
 		        if (unit.OwnerPlayerId == PlayerComponent.LocalPlayerId)
+		        {
 			        entity.Get<LocalPlayerOwnedTag>();
-		        else 
-					entity.Del<LocalPlayerOwnedTag>();
-		        
+			        entity.Del<UnitAiComponent>();
+		        }
+		        else
+		        {
+			        entity.Del<LocalPlayerOwnedTag>();
+			        entity.Get<UnitAiComponent>();
+		        }
+
 		        foreach (var renderer in coloredRenderers.Renderers)
 			        renderer.material.SetColor(colorId, gameStartData.PlayerColors[unit.OwnerPlayerId]);
 	        }

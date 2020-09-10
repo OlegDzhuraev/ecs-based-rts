@@ -8,7 +8,7 @@ namespace InsaneOne.EcsRts
         readonly EcsWorld world = null;
 
         readonly EcsFilter<ProductionComponent>.Exclude<LocalPlayerOwnedTag> productionFilter = null;
-        readonly EcsFilter<UnitComponent, AttackComponent>.Exclude<MoveOrderEvent, LocalPlayerOwnedTag> attackersFilter = null;
+        readonly EcsFilter<UnitComponent, AttackComponent, UnitAiComponent>.Exclude<LocalPlayerOwnedTag> attackersFilter = null;
         readonly EcsFilter<UnitComponent, LocalPlayerOwnedTag> allPlayerUnitsFilter = null;
         
         void IEcsRunSystem.Run ()
@@ -37,14 +37,18 @@ namespace InsaneOne.EcsRts
         {
             foreach (var i in attackersFilter)
             {
-                var entity = attackersFilter.GetEntity(i);
-                var unit = attackersFilter.Get1(i);
+                ref var aiComponent = ref attackersFilter.Get3(i);
 
-                ref var moveOrder = ref entity.Get<MoveOrderEvent>();
-                
-                var randomedId = Random.Range(0, allPlayerUnitsFilter.GetEntitiesCount());
-                
-                moveOrder.DestinationPosition = allPlayerUnitsFilter.Get1(randomedId).Position;
+                if (!aiComponent.Target)
+                {
+                    var randomedId = Random.Range(0, allPlayerUnitsFilter.GetEntitiesCount());
+                    
+                    var target = allPlayerUnitsFilter.Get1(randomedId);
+                    aiComponent.Target = target.SelfObject;
+                    
+                    ref var moveOrder = ref attackersFilter.GetEntity(i).Get<MoveOrderEvent>();
+                    moveOrder.DestinationPosition = target.Position;
+                }
             }
         }
     }

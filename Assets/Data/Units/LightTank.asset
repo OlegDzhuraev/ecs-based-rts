@@ -15,7 +15,7 @@ MonoBehaviour:
   Prefab: {fileID: 5634468991950757750, guid: 79147a8e9968e8f4ba7296e879ff31b2, type: 3}
   Move:
     CanMove: 1
-    MoveSpeed: 2
+    MoveSpeed: 1.5
     RotationSpeed: 360
     StopDistance: 0.15
   Defense:
@@ -33,3 +33,7 @@ MonoBehaviour:
   Effects:
     ShootEffect: {fileID: 347417622014788243, guid: bcc696785c061974aaf113f6e1ce18a5,
       type: 3}
+  Harvest:
+    CanHarvest: 0
+    HarvestSpeed: 0
+    MaxResourcesAmount: 0

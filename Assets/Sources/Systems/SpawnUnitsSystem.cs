@@ -67,7 +67,11 @@ namespace InsaneOne.EcsRts
             
                 movable.Destination = spawnedObject.transform.position;
                 
-                unitEntitiy.Get<NavMeshComponent>();
+                ref var navComponent = ref unitEntitiy.Get<NavMeshComponent>();
+                navComponent.NavMeshAgent = spawnedObject.AddComponent<NavMeshAgent>();
+                navComponent.NavMeshAgent.speed = movable.Data.MoveSpeed;
+                navComponent.NavMeshAgent.destination = spawnedObject.transform.position;
+                navComponent.NavMeshAgent.angularSpeed = movable.Data.RotationSpeed;
             }
             else
             {
