@@ -1,8 +1,22 @@
 # ECS-based RTS on Unity
-RTS game example based on Entity Component System in Unity game engine.
+RTS game example based on **Entity Component System** in Unity game engine.
 
-Unity version: 2019.4<br>
-Using ECS Framework: [LeoECS](https://github.com/Leopotam/ecs) by [Leopotam](mailto:leopotam@gmail.com)
+## Purpose of this project
+It was hard for me to find anything seriously or big project on GitHub based on ECS. So I decided to create this one and show more complicated game than endless snakes and pac mans. Seriusly, guys, ECS community should stop creating mobile one-mechanic prototypes as examples of **Entity Component System** :)
 
-# Purpose of this project
-It was hard for me to find big project on GitHub based on ECS. So I decided to create this one and show more complicated game than endless snakes and pac mans. Seriusly, guys, ECS community should stop creating only mobile 1-day prototypes as examples of Entity Component System! :)
+## Requirements
+**Unity version:** 2020.1<br>
+**ECS Framework:** [LeoECS](https://github.com/Leopotam/ecs) by [Leopotam](mailto:leopotam@gmail.com)
+
+## Future updates
+This project is made for fun, not for something serious, so I can't guarantee that I will update it oftently. But maybe I will :)
+
+## License
+MIT License.
+
+## Donate
+You can support development using cryptocurrency :)
+
+**Zilliqa $ZIL (ZIL):** zil1p6j0js2d5dat36n9zpp4g9xj776vghukkaa32l
+
+**Stellar Lumens (XLM):** GBY4Q6AKWLQIOT37D3X643LLEVZA7WRWBUU4RCVEG6PN57QCIWT7LRIX
