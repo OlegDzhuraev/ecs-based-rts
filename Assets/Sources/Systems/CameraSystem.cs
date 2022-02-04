@@ -6,7 +6,7 @@ namespace InsaneOne.EcsRts
 {
     sealed class CameraSystem : IEcsInitSystem, IEcsRunSystem
     {
-        const float ScreenBorderInPx = 5;
+        const float screenBorderInPx = 5;
         
         readonly EcsWorld world;
         readonly GameStartData startData;
@@ -31,8 +31,8 @@ namespace InsaneOne.EcsRts
             movable.Destination = movable.Transform.position;
             movable.Data.MoveSpeed = startData.CameraSpeed;
             
-            var startPoint = new Vector2(0 + ScreenBorderInPx, 0 + ScreenBorderInPx);
-            var size = new Vector2(Screen.width - ScreenBorderInPx * 2f, Screen.height - ScreenBorderInPx * 2f);
+            var startPoint = new Vector2(0 + screenBorderInPx, 0 + screenBorderInPx);
+            var size = new Vector2(Screen.width - screenBorderInPx * 2f, Screen.height - screenBorderInPx * 2f);
             screenSize = new Vector2(Screen.width, Screen.height);
             screenCenter = screenSize / 2f;
             
@@ -40,7 +40,7 @@ namespace InsaneOne.EcsRts
             screenRect = new Rect(Vector2.zero, screenSize);
         }
         
-        void IEcsRunSystem.Run ()
+        void IEcsRunSystem.Run()
         {
             var input = GetKeysFormattedInput() + GetMouseFormattedInput() + GetMouseBorderInput();
             

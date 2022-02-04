@@ -5,11 +5,11 @@ namespace InsaneOne.EcsRts
 {
     sealed class AiSystem : IEcsRunSystem 
     {
-        readonly EcsWorld world = null;
-
         readonly EcsFilter<ProductionComponent>.Exclude<LocalPlayerOwnedTag> productionFilter = null;
         readonly EcsFilter<UnitComponent, AttackComponent, UnitAiComponent>.Exclude<LocalPlayerOwnedTag> attackersFilter = null;
         readonly EcsFilter<UnitComponent, LocalPlayerOwnedTag> allPlayerUnitsFilter = null;
+
+        const int maxAiQueue = 3;
         
         void IEcsRunSystem.Run ()
         {
@@ -25,7 +25,7 @@ namespace InsaneOne.EcsRts
 
                 ref var production = ref productionFilter.Get1(i);
 
-                if (production.Queue.Count >= 3)
+                if (production.Queue.Count >= maxAiQueue)
                     continue;
 
                 var units = production.Data.Units;

@@ -10,8 +10,6 @@ namespace InsaneOne.EcsRts
         readonly EcsWorld world;
         readonly GameStartData startData;
 
-        readonly EcsFilter<PlayerComponent> playerFilter = null;
-
         SpawnPoint[] spawnPoints;
 
         public void Init()

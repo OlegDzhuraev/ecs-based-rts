@@ -27,5 +27,8 @@ namespace InsaneOne.EcsRts.Storing
 		[Header("UI Templates")] 
 		public GameObject HealthbarTemplate;
 		public GameObject BuyButtonTemplate;
+		[SerializeField] Gradient healthbarsColor;
+
+		public Color GetHealthbarColor(float healthPercents) => healthbarsColor.Evaluate(healthPercents);
 	}
 }

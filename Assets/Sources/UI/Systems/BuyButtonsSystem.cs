@@ -16,16 +16,18 @@ namespace InsaneOne.EcsRts.UI
         readonly List<GameObject> drawnButtons = new List<GameObject>();
         
         RectTransform buttonsPanel;
-
+        
+        const string uiTextName = "Text";
+        
         void IEcsInitSystem.Init()
         {
-            var buttonsPanelObj = GameObject.FindWithTag("UI/BuyButtonsPanel");
+            var buttonsPanelObj = GameObject.FindWithTag(Constants.UiBuyPanelTag);
             buttonsPanel = buttonsPanelObj.GetComponent<RectTransform>();
         }
         
-        void IEcsRunSystem.Run ()
+        void IEcsRunSystem.Run()
         {
-            foreach (var i in showButtonsFilter) // todo check is foreach really needed for 1 event?
+            foreach (var i in showButtonsFilter) 
             {
                 ClearDrawnButtons();
                 
@@ -48,7 +50,7 @@ namespace InsaneOne.EcsRts.UI
             var button = buttonObj.GetComponent<Button>();
             
             button.onClick.AddListener(delegate { BuyButtonClick(productionEntity, unitData); });
-            button.transform.Find("Text").GetComponent<Text>().text = unitData.name;
+            button.transform.Find(uiTextName).GetComponent<Text>().text = $"{unitData.name}\n$ {unitData.Production.Price}";
             
             drawnButtons.Add(buttonObj);
         }

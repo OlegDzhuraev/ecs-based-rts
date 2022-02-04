@@ -5,8 +5,6 @@ namespace InsaneOne.EcsRts
 {
     sealed class AttackSystem : IEcsRunSystem
     {
-        readonly EcsSystems ecsSystems;
-        
         readonly EcsFilter<AttackComponent, UnitTargetComponent> filter = null;
         
         void IEcsRunSystem.Run ()
@@ -17,7 +15,7 @@ namespace InsaneOne.EcsRts
             {
                 ref var attackComponent = ref filter.Get1(i);
                 ref var unitTarget = ref filter.Get2(i);
-                var unitEntity = filter.GetEntity(i);
+                ref var unitEntity = ref filter.GetEntity(i);
                 
                 if (attackComponent.IsReloading)
                 {
@@ -27,6 +25,9 @@ namespace InsaneOne.EcsRts
                     
                     continue;
                 }
+
+                if (!unitTarget.EnemyTargetEntity.IsAlive())
+                    continue;
 
                 unitEntity.Get<ShootEvent>();
                 

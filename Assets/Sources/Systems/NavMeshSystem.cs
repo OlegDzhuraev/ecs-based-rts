@@ -8,7 +8,7 @@ namespace InsaneOne.EcsRts
         readonly EcsFilter<MovableComponent, MoveOrderEvent> ordersFilter = null;
         readonly EcsFilter<NavMeshComponent, MovableComponent> moveFilter = null;
         
-        void IEcsRunSystem.Run ()
+        void IEcsRunSystem.Run()
         {
             HandleOrders();
             HandleMove();

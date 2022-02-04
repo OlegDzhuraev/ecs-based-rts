@@ -7,7 +7,7 @@ namespace InsaneOne.EcsRts
         readonly EcsFilter<PlayerComponent, SpendPlayerResourcesEvent> spendMoneyFilter = null;
         readonly EcsFilter<PlayerComponent, AddPlayerResourcesEvent> addMoneyFilter = null;
 
-        void IEcsRunSystem.Run ()
+        void IEcsRunSystem.Run()
         {
             foreach (var i in spendMoneyFilter)
             {

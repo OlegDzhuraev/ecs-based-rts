@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace InsaneOne.EcsRts 
 {
-    // looks like this system version is not good and requires refactor
     sealed class HarvestingSystem : IEcsInitSystem, IEcsRunSystem
     {
         readonly EcsWorld world;
@@ -21,7 +20,7 @@ namespace InsaneOne.EcsRts
         
         public void Init()
         {
-            var fields = GameObject.FindGameObjectsWithTag("ResourceField");
+            var fields = GameObject.FindGameObjectsWithTag(Constants.ResourceFieldTag);
 
             foreach (var fieldObject in fields)
             {
@@ -29,14 +28,14 @@ namespace InsaneOne.EcsRts
                 ref var field = ref entity.Get<ResourceFieldComponent>();
 
                 field.Transform = fieldObject.transform;
-                field.ResourcesLeft = 10000; // todo change this hardcode
+                field.ResourcesLeft = Constants.StartResourcesAmountOnField;
                 
                 actualFieldsTransforms.Add(field.Transform);
                 actualFields.Add(entity);
             }
         }
         
-        void IEcsRunSystem.Run ()
+        void IEcsRunSystem.Run()
         {
             ProcessFieldSelect();
             ProcessHarvest();
@@ -90,7 +89,7 @@ namespace InsaneOne.EcsRts
             {
                 ref var harvester = ref harvestingFilter.Get1(i);
                 ref var unit = ref harvestingFilter.Get2(i);
-                var entity = harvestingFilter.GetEntity(i);
+                ref var entity = ref harvestingFilter.GetEntity(i);
                
                 if (Vector3.Distance(unit.Position, harvester.SelectedFieldPos) > 1f)
                     continue;
@@ -117,14 +116,14 @@ namespace InsaneOne.EcsRts
             {
                 ref var harvester = ref giveResourcesFilter.Get1(i);
                 ref var unit = ref giveResourcesFilter.Get2(i);
-                var entity = harvestingFilter.GetEntity(i);
+                ref var entity = ref giveResourcesFilter.GetEntity(i);
                 
                 if (Vector3.Distance(unit.Position, harvester.GiveResourcesPoint) > 1f)
                     continue;
                 
-                // todo check why it OwnerPlayer cn be null, it should exist all time.
+                // todo check why it OwnerPlayer can be null, it should exist all time.
                 if (unit.OwnerPlayer.IsAlive())
-                    unit.OwnerPlayer.Get<AddPlayerResourcesEvent>().Value = (int) harvester.ResourcesAmount;
+                    unit.OwnerPlayer.Get<AddPlayerResourcesEvent>().Value = (int)harvester.ResourcesAmount;
 
                 harvester.ResourcesAmount = 0;
                 entity.Del<HarvesterGiveResourcesTag>();

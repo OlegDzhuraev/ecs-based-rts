@@ -9,7 +9,7 @@ namespace InsaneOne.EcsRts.UI
         readonly EcsFilter<FloatingComponent> filter = null;
         readonly Camera camera;
         
-        void IEcsRunSystem.Run ()
+        void IEcsRunSystem.Run()
         {
             foreach (var i in filter)
             {

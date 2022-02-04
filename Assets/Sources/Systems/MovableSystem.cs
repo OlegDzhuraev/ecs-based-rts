@@ -7,7 +7,7 @@ namespace InsaneOne.EcsRts
     {
         readonly EcsFilter<MovableComponent> filter = null;
         
-        void IEcsRunSystem.Run ()
+        void IEcsRunSystem.Run()
         {
             var deltaTime = Time.deltaTime;
             

@@ -5,10 +5,9 @@ namespace InsaneOne.EcsRts
 {
     sealed class UnitsEffectsSystem : IEcsRunSystem 
     {
-        readonly EcsWorld world = null;
         readonly EcsFilter<AttackComponent, EffectsComponent, ShootEvent> shootFilter = null;
         
-        void IEcsRunSystem.Run ()
+        void IEcsRunSystem.Run()
         {
             foreach (var i in shootFilter)
             {

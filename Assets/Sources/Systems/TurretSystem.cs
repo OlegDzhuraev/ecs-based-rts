@@ -10,7 +10,7 @@ namespace InsaneOne.EcsRts
 
         const float tempTurRotSpeed = 360;
         
-        void IEcsRunSystem.Run ()
+        void IEcsRunSystem.Run()
         {
             var dTime = Time.deltaTime;
             
@@ -40,7 +40,7 @@ namespace InsaneOne.EcsRts
                 ref var turretComponent = ref noTargetFilter.Get1(i);
                 var turret = turretComponent.Turret;
                 
-                turret.localRotation = Quaternion.RotateTowards(turret.localRotation,Quaternion.identity, tempTurRotSpeed * dTime);
+                turret.localRotation = Quaternion.RotateTowards(turret.localRotation, Quaternion.identity, tempTurRotSpeed * dTime);
             }
         }
     }

@@ -12,10 +12,12 @@ namespace InsaneOne.EcsRts.UI
         readonly EcsFilter<PlayerComponent, SpendPlayerResourcesEvent> spendMoneyFilter = null;
         readonly EcsFilter<PlayerComponent, AddPlayerResourcesEvent> addMoneyFilter = null;
         readonly EcsFilter<PlayerComponent> playersFilter = null;
+
+        const string moneyText = "Money: $";
         
         void IEcsInitSystem.Init()
         {
-            var moneyTextObject = GameObject.FindWithTag("UI/MoneyText");
+            var moneyTextObject = GameObject.FindWithTag(Constants.UiMoneyTextTag);
 
             ref var moneyText = ref world.NewEntity().Get<MoneyTextComponent>();
             moneyText.Text = moneyTextObject.GetComponent<Text>();
@@ -34,7 +36,7 @@ namespace InsaneOne.EcsRts.UI
             }
         }
         
-        void IEcsRunSystem.Run ()
+        void IEcsRunSystem.Run()
         {
             foreach (var i in spendMoneyFilter)
             {
@@ -62,6 +64,6 @@ namespace InsaneOne.EcsRts.UI
             }
         }
 
-        void SetText(ref MoneyTextComponent money, float value) => money.Text.text = "Money: $" + Mathf.RoundToInt(value);
+        void SetText(ref MoneyTextComponent money, float value) => money.Text.text = moneyText + Mathf.RoundToInt(value);
     }
 }

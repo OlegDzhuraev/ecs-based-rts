@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using InsaneOne.EcsRts.Storing;
 using Leopotam.Ecs;
 using UnityEngine;
@@ -15,8 +16,10 @@ namespace InsaneOne.EcsRts.UI
         readonly EcsFilter<UnitComponent, TakeDamageEvent> takeDamageFilter = null;
         readonly EcsFilter<AddHealthbarEvent> addHealthbarFilter = null;
         readonly EcsFilter<RemoveHealthbarEvent> removeHealthbarFilter = null;
+
+        const string healthbarFillName = "Fill";
         
-        void IEcsRunSystem.Run ()
+        void IEcsRunSystem.Run()
         {
             foreach (var q in takeDamageFilter)
             {
@@ -29,8 +32,7 @@ namespace InsaneOne.EcsRts.UI
                     if (healthbar.UnitComponent.SelfObject == unit.SelfObject)
                     {
                         healthbar.FillImage.fillAmount = GetPercents(unit.Health, unit.DefenseData.MaxHealth);
-                        
-                        // todo colorize healthbar depending on HP value
+                        healthbar.FillImage.color = startData.GetHealthbarColor(healthbar.FillImage.fillAmount);
                     }
                 }
             }
@@ -59,6 +61,14 @@ namespace InsaneOne.EcsRts.UI
         
         void CreateHealthbarEntity(ref UnitComponent forUnit)
         {
+            foreach (var w in filter)
+            {
+                ref var targetHealthbar = ref filter.Get1(w);
+
+                if (targetHealthbar.UnitComponent.SelfObject == forUnit.SelfObject)
+                    return;
+            }
+            
             var healthbarEntity = world.NewEntity();
             ref var healthbar = ref healthbarEntity.Get<HealthbarComponent>();
             ref var floating = ref healthbarEntity.Get<FloatingComponent>();
@@ -69,8 +79,9 @@ namespace InsaneOne.EcsRts.UI
             
             healthbar.UnitComponent = forUnit;
             healthbar.SelfObject = spawnedObject;
-            healthbar.FillImage = spawnedObject.transform.Find("Fill").GetComponent<Image>();
+            healthbar.FillImage = spawnedObject.transform.Find(healthbarFillName).GetComponent<Image>();
             healthbar.FillImage.fillAmount = GetPercents(forUnit.Health, forUnit.DefenseData.MaxHealth);
+            healthbar.FillImage.color = startData.GetHealthbarColor(healthbar.FillImage.fillAmount);
             
             floating.Height = 1f;
             floating.FollowTransform = forUnit.Transform;

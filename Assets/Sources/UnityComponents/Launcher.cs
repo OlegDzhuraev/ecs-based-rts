@@ -7,8 +7,8 @@ namespace InsaneOne.EcsRts
 {
     sealed class Launcher : MonoBehaviour
     {
-        [SerializeField] GameStartData StartData;
-        [SerializeField] Canvas UICanvas;
+        [FormerlySerializedAs("StartData")] [SerializeField] GameStartData startData;
+        [FormerlySerializedAs("UICanvas")] [SerializeField] Canvas uiCanvas;
         
         EcsWorld world;
         EcsSystems systems;
@@ -53,9 +53,9 @@ namespace InsaneOne.EcsRts
             systems.Add(new UI.GameInfoSystem());
             systems.Add(new UI.BuyButtonsSystem());
 
-            systems.Inject(StartData);
+            systems.Inject(startData);
             systems.Inject(Camera.main);
-            systems.Inject(UICanvas);
+            systems.Inject(uiCanvas);
 
             systems.OneFrame<TakeDamageEvent>();
             systems.OneFrame<ChangeUnitOwnerEvent>();

@@ -10,9 +10,9 @@ namespace InsaneOne.EcsRts
         
         readonly EcsFilter<UnitComponent, UnitTargetComponent> attackersFilter = null;
         
-        const float TempSqrDist = 25;
+        const float tempSqrDist = 25;
         
-        void IEcsRunSystem.Run ()
+        void IEcsRunSystem.Run()
         {
             SearchEnemies();
 
@@ -35,7 +35,7 @@ namespace InsaneOne.EcsRts
             {
                 ref var otherUnit = ref unitsFilter.Get1(i);
 
-                if (IsEnemies(unit, otherUnit) && CanAttackByDistance(unit.Position, otherUnit.Position, TempSqrDist))
+                if (IsEnemies(unit, otherUnit) && CanAttackByDistance(unit.Position, otherUnit.Position, tempSqrDist))
                 {
                     ref var unitTarget = ref unitEntity.Get<UnitTargetComponent>();
                     
@@ -56,7 +56,7 @@ namespace InsaneOne.EcsRts
                 ref var unit = ref attackersFilter.Get1(i);
                 ref var unitTarget = ref attackersFilter.Get2(i);
                 
-                if (!CanAttackByDistance(unit.Position, unitTarget.EnemyTarget.Position, TempSqrDist))
+                if (!unitTarget.EnemyTargetEntity.IsAlive() || !CanAttackByDistance(unit.Position, unitTarget.EnemyTarget.Position, tempSqrDist))
                     attackersFilter.GetEntity(i).Del<UnitTargetComponent>();
             }
         }
