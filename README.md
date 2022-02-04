@@ -9,7 +9,7 @@ It was hard for me to find anything seriously or big project on GitHub based on 
 **ECS Framework:** [LeoECS](https://github.com/Leopotam/ecs) by [Leopotam](mailto:leopotam@gmail.com)
 
 ## Future updates
-This project is made for fun, not for something serious, so I can't guarantee that I will update it oftently. But maybe I will :)
+This project is made for fun, not for something serious, so I can't guarantee that I will update it oftently. :)
 
 ## License
 MIT License.
